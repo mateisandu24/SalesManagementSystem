@@ -1,5 +1,6 @@
 using SalesManagementSystem.Models;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SalesManagementSystem
@@ -22,10 +23,20 @@ namespace SalesManagementSystem
 
             if (!string.IsNullOrEmpty(product.ImageUrl))
             {
-                pbProductImage.SizeMode = PictureBoxSizeMode.Zoom;
-                pbProductImage.LoadAsync(product.ImageUrl);
-            }
+                string wixPrefix = "https://static.wixstatic.com/media/";
+                string fullImageUrl = wixPrefix + product.ImageUrl;
 
+                pbProductImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+                try
+                {
+                    pbProductImage.LoadAsync(fullImageUrl);
+                }
+                catch
+                {
+                    pbProductImage.Image = SystemIcons.Error.ToBitmap();
+                }
+            }
 
             if (userRole == Role.Admin)
             {

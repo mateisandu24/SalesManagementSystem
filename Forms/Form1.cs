@@ -2,6 +2,7 @@ using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace SalesManagementSystem
@@ -17,7 +18,13 @@ namespace SalesManagementSystem
             _currentUser = user;
             _productRepo = new ProductRepository(Utils.ConfigHelper.ConnectionString);
 
-            SetupPermissions();
+            RefreshProductList();
+
+            if (_currentUser.Role == Role.User)
+            {
+                btnImport.Visible = false;
+                btnDelete.Visible = false;
+            }
         }
 
         private void SetupPermissions()
@@ -67,5 +74,33 @@ namespace SalesManagementSystem
             Application.Exit();
             base.OnFormClosed(e);
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(dgvProducts.SelectedRows.Count>0)
+            {
+                var selectedProduct = (Product)dgvProducts.SelectedRows[0].DataBoundItem;
+
+                var confirmResult = MessageBox.Show
+                    ($"Ești sigur că vrei să ștergi {selectedProduct.Name}?",
+                    "Confirmare Ștergere",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirmResult == DialogResult.Yes)
+                {
+                    _productRepo.Delete(selectedProduct.Id);
+
+                    MessageBox.Show($"{selectedProduct.Name} a fost șters cu succes!", "Șters");
+
+                    RefreshProductList();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Te rugăm să selectezi un rând întreg din tabel făcând click pe marginea din stânga a rândului.", "Atenție");
+            }
+        }
+
     }
 }
