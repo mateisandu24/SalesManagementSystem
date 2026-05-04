@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using SalesManagementSystem.Models;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace SalesManagementSystem.Repositories
 {
-    public class UtilizatorRepository
+    public class UserRepository
     {
         private readonly string _connectionString;
-        public UtilizatorRepository(string connectionString)
+
+        public UserRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        /// hash check
+        ///hash algorithm (SHA256)
         private string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -35,16 +33,15 @@ namespace SalesManagementSystem.Repositories
             }
         }
 
-        public Utilizator CheckPassword(string username, string password)
+        public User Authenticate(string username, string password)
         {
             string hashedPassword = HashPassword(password);
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                string sql = "SELECT * FROM Utilizatori WHERE Username = @Username AND ParolaHash = @ParolaHash";
-                return connection.QueryFirstOrDefault<Utilizator>(sql, new { Username = username, ParolaHash = hashedPassword });
+                string sql = "SELECT * FROM Users WHERE Username = @Username AND PasswordHash = @PasswordHash";
+                return connection.Query<User>(sql, new { Username = username, PasswordHash = hashedPassword }).FirstOrDefault();
             }
         }
-
     }
 }

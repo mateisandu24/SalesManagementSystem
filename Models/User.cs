@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace SalesManagementSystem.Models
 {
-    public class Categorie
+    public class User
     {
         public Guid Id { get; set; }
-        public string Nume { get; set; }
+
+        public string Username { get; set; }
+
+        public string PasswordHash { get; set; }
+
+        public Role Role { get; set; }
     }
 }
