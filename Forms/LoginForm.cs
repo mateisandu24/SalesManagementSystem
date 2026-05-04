@@ -1,4 +1,4 @@
-﻿using SalesManagementSystem.Models;
+using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
@@ -14,6 +14,9 @@ namespace SalesManagementSystem
         {
             InitializeComponent();
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
+            Utils.ThemeManager.ApplyTheme(this);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

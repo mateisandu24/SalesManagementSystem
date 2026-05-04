@@ -1,4 +1,4 @@
-﻿using SalesManagementSystem.Repositories;
+using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
 using System.Windows.Forms;
@@ -14,6 +14,9 @@ namespace SalesManagementSystem
             InitializeComponent();
 
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
+            Utils.ThemeManager.ApplyTheme(this);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)

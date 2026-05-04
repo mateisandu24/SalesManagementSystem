@@ -25,6 +25,20 @@ namespace SalesManagementSystem
                 btnImport.Visible = false;
                 btnDelete.Visible = false;
             }
+
+            Utils.ThemeManager.ApplyTheme(this);
+            SetupLayout();
+        }
+
+        private void SetupLayout()
+        {
+            this.MinimumSize = new System.Drawing.Size(800, 500);
+            dgvProducts.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            btnImport.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            if (btnDelete != null)
+            {
+                btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            }
         }
 
         private void SetupPermissions()

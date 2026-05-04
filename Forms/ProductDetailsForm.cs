@@ -13,6 +13,9 @@ namespace SalesManagementSystem
         {
             InitializeComponent();
             _product = product;
+            Utils.ThemeManager.ApplyTheme(this);
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
 
 
             lblProductname.Text = product.Name;
