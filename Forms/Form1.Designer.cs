@@ -1,4 +1,4 @@
-﻿namespace SalesManagementSystem
+namespace SalesManagementSystem
 {
     partial class Form1
     {
@@ -41,6 +41,7 @@
             this.btnImport.TabIndex = 0;
             this.btnImport.Text = "Importă CSV";
             this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
 
             // 
             // dgvProducts
@@ -50,6 +51,7 @@
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.Size = new System.Drawing.Size(776, 383);
             this.dgvProducts.TabIndex = 1;
+            this.dgvProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellDoubleClick);
             // 
             // Form1
             // 

@@ -1,4 +1,4 @@
-﻿using SalesManagementSystem.Models;
+using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
@@ -60,6 +60,12 @@ namespace SalesManagementSystem
                 var details = new ProductDetailsForm(product, _currentUser.Role);
                 details.ShowDialog();
             }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            Application.Exit();
+            base.OnFormClosed(e);
         }
     }
 }
