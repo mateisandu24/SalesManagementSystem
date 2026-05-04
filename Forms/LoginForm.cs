@@ -43,9 +43,9 @@ namespace SalesManagementSystem
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            // Deschidem formularul de înregistrare
             RegisterForm regForm = new RegisterForm();
-            regForm.ShowDialog(); // ShowDialog forțează utilizatorul să termine înregistrarea sau să închidă fereastra
+
+            regForm.ShowDialog(); 
         }
 
 

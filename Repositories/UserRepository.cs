@@ -54,16 +54,13 @@ namespace SalesManagementSystem.Repositories
                 {
                     try
                     {
-                        // 1. Hash password
-                        user.PasswordHash = HashPassword(user.PasswordHash); // folosim metoda de hashing existentă
+                        user.PasswordHash = HashPassword(user.PasswordHash); 
 
-                        // 2. Insert Customer
                         string customerSql = @"INSERT INTO Customers (FirstName, LastName, Email) 
                                        OUTPUT INSERTED.Id 
                                        VALUES (@FirstName, @LastName, @Email)";
                         var customerId = connection.QuerySingle<Guid>(customerSql, customer, transaction);
 
-                        // 3. Insert User (legăm user-ul de rolul implicit 'User')
                         string userSql = @"INSERT INTO Users (Username, PasswordHash, Role) 
                                    VALUES (@Username, @PasswordHash, @Role)";
                         connection.Execute(userSql, new

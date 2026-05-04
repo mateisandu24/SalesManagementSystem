@@ -18,7 +18,7 @@ namespace SalesManagementSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // 1. Validare câmpuri goale
+
             if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
                 string.IsNullOrWhiteSpace(txtPassword.Text) ||
                 string.IsNullOrWhiteSpace(txtFirstName.Text) ||
@@ -28,7 +28,6 @@ namespace SalesManagementSystem
                 return;
             }
 
-            // 2. Verificarea parolei (Match check)
             if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Parolele introduse nu coincid!", "Eroare Validare");
@@ -38,11 +37,10 @@ namespace SalesManagementSystem
                 return;
             }
 
-            // 3. Crearea obiectelor Model
             var newUser = new User
             {
                 Username = txtUsername.Text.Trim(),
-                PasswordHash = txtPassword.Text // Va fi hash-uită în UserRepository
+                PasswordHash = txtPassword.Text 
             };
 
             var newCustomer = new Customer
@@ -52,7 +50,6 @@ namespace SalesManagementSystem
                 Email = txtEmail.Text.Trim()
             };
 
-            // 4. Salvarea în bază
             try
             {
                 bool success = _userRepo.Register(newUser, newCustomer);

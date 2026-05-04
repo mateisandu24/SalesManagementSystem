@@ -40,7 +40,7 @@ namespace SalesManagementSystem.Repositories
 
                 if (!parser.EndOfData)
                 {
-                    parser.ReadFields(); // Sărim peste header
+                    parser.ReadFields(); 
                 }
 
                 using (var connection = new SqlConnection(_connectionString))
