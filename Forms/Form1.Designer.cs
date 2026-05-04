@@ -41,7 +41,7 @@
             this.btnImport.TabIndex = 0;
             this.btnImport.Text = "Importă CSV";
             this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+
             // 
             // dgvProducts
             // 
@@ -60,7 +60,7 @@
             this.Controls.Add(this.btnImport);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.ResumeLayout(false);
 

@@ -19,3 +19,6 @@ C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesMan.8E186F91.Up2Da
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.exe
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.pdb
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.Form1.resources
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.LoginForm.resources
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.RegisterForm.resources
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.ProductDetailsForm.resources

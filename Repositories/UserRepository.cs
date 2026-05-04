@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using SalesManagementSystem.Models;
+using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -41,6 +42,46 @@ namespace SalesManagementSystem.Repositories
             {
                 string sql = "SELECT * FROM Users WHERE Username = @Username AND PasswordHash = @PasswordHash";
                 return connection.Query<User>(sql, new { Username = username, PasswordHash = hashedPassword }).FirstOrDefault();
+            }
+        }
+
+        public bool Register(User user, Customer customer)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Hash password
+                        user.PasswordHash = HashPassword(user.PasswordHash); // folosim metoda de hashing existentă
+
+                        // 2. Insert Customer
+                        string customerSql = @"INSERT INTO Customers (FirstName, LastName, Email) 
+                                       OUTPUT INSERTED.Id 
+                                       VALUES (@FirstName, @LastName, @Email)";
+                        var customerId = connection.QuerySingle<Guid>(customerSql, customer, transaction);
+
+                        // 3. Insert User (legăm user-ul de rolul implicit 'User')
+                        string userSql = @"INSERT INTO Users (Username, PasswordHash, Role) 
+                                   VALUES (@Username, @PasswordHash, @Role)";
+                        connection.Execute(userSql, new
+                        {
+                            Username = user.Username,
+                            PasswordHash = user.PasswordHash,
+                            Role = Role.User.ToString()
+                        }, transaction);
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
             }
         }
     }
