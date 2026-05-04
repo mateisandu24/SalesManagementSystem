@@ -1,4 +1,4 @@
-﻿namespace SalesManagementSystem
+namespace SalesManagementSystem
 {
     partial class LoginForm
     {
@@ -76,7 +76,7 @@
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click_1);
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnCreate
             // 
@@ -86,6 +86,7 @@
             this.btnCreate.TabIndex = 6;
             this.btnCreate.Text = "Creere cont";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // LoginForm
             // 

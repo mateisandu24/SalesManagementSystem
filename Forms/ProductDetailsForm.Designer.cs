@@ -1,4 +1,4 @@
-﻿namespace SalesManagementSystem
+namespace SalesManagementSystem
 {
     partial class ProductDetailsForm
     {

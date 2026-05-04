@@ -1,4 +1,4 @@
-﻿namespace SalesManagementSystem
+namespace SalesManagementSystem
 {
     partial class RegisterForm
     {
@@ -93,6 +93,7 @@
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Salvează";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblFirstName
             // 
@@ -130,14 +131,14 @@
             this.lblUsername.TabIndex = 10;
             this.lblUsername.Text = "Username";
             // 
-            // label5
+            // lblPassword
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 119);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Parola";
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.Location = new System.Drawing.Point(12, 119);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(37, 13);
+            this.lblPassword.TabIndex = 11;
+            this.lblPassword.Text = "Parola";
             // 
             // lblConfirmPassword
             // 
@@ -154,7 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(418, 234);
             this.Controls.Add(this.lblConfirmPassword);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblLastName);
@@ -186,7 +187,7 @@
         private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.Label lblEmail;
         private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblConfirmPassword;
     }
 }

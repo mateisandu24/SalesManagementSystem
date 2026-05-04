@@ -1,4 +1,4 @@
-﻿using SalesManagementSystem.Models;
+using SalesManagementSystem.Models;
 using System;
 using System.Windows.Forms;
 
@@ -14,10 +14,10 @@ namespace SalesManagementSystem
             _product = product;
 
 
-            //lblProductName.Text = product.Name;
-            //lblPrice.Text = $"Preț: {product.Price} RON";
-            //lblBrand.Text = $"Brand: {product.Brand}";
-            //rtbDescription.Text = product.Description;
+            lblProductname.Text = product.Name;
+            lblPrice.Text = $"Preț: {product.Price} RON";
+            lblBrand.Text = $"Brand: {product.Brand}";
+            richTextBox1.Text = product.Description;
 
 
             if (!string.IsNullOrEmpty(product.ImageUrl))

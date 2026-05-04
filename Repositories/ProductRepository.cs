@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using SalesManagementSystem.Models;
 using Microsoft.VisualBasic.FileIO;
 using System;
@@ -138,7 +138,7 @@ namespace SalesManagementSystem.Repositories
                     p.ImageUrl,
                     p.Price,
                     p.Stock,
-                    p.VAT,
+                    p.Vat,
                     MainCategory = p.MainCategory.ToString(),
                     SubCategory = p.SubCategory.ToString(),
                     Brand = p.Brand.ToString()

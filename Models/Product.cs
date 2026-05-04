@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +20,7 @@ namespace SalesManagementSystem.Models
 
         public int Stock { get; set; }
 
-        public decimal VAT { get; set; }
+        public decimal Vat { get; set; }
 
         public MainCategory MainCategory { get; set; }
 
