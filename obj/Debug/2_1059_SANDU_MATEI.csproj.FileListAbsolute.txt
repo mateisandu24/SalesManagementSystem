@@ -1,0 +1,9 @@
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\bin\Debug\2_1059_SANDU_MATEI.exe.config
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\bin\Debug\2_1059_SANDU_MATEI.exe
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\bin\Debug\2_1059_SANDU_MATEI.pdb
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\2_1059_SANDU_MATEI.csproj.AssemblyReference.cache
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\_2_1059_SANDU_MATEI.Properties.Resources.resources
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\2_1059_SANDU_MATEI.csproj.GenerateResource.cache
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\2_1059_SANDU_MATEI.csproj.CoreCompileInputs.cache
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\2_1059_SANDU_MATEI.exe
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\2_1059_SANDU_MATEI.pdb
