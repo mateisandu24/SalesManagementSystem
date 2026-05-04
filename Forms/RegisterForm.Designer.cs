@@ -39,7 +39,7 @@ namespace SalesManagementSystem
             this.lblLastName = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
             this.lblConfirmPassword = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 

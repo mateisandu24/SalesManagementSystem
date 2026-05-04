@@ -19,6 +19,7 @@ namespace SalesManagementSystem.Repositories
             _connectionString = connectionString;
         }
 
+
         private string CleanHTML(string input)
         {
             if (string.IsNullOrEmpty(input))

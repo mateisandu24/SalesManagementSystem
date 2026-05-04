@@ -22,3 +22,4 @@ C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.F
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.LoginForm.resources
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.RegisterForm.resources
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.ProductDetailsForm.resources
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.ImportForm.resources

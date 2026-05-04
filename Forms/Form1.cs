@@ -26,6 +26,37 @@ namespace SalesManagementSystem
             btnImport.Visible = isAdmin; // Doar adminul importă
             this.Text = isAdmin ? "Sales System - Admin Mode" : "Sales System - Shop Mode";
         }
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            // Creăm instanța noului formular
+            ImportForm importWindow = new ImportForm();
+
+            // Îl deschidem ca Dialog (Userul trebuie să termine importul înainte de a reveni la tabel)
+            importWindow.ShowDialog();
+
+            // Opțional: Reîmprospătăm tabelul după ce se închide fereastra de import
+            RefreshProductList();
+        }
+        private void RefreshProductList()
+        {
+            try
+            {
+                // 1. Luăm lista proaspătă de produse din baza de date
+                var products = _productRepo.GetAll();
+
+                // 2. Resetăm sursa de date a tabelului pentru a forța refresh-ul vizual
+                dgvProducts.DataSource = null;
+                dgvProducts.DataSource = products;
+
+                // Opțional: Ascundem coloana de ID sau ImageUrl dacă nu vrem să le vedem în tabel
+                if (dgvProducts.Columns["Id"] != null) dgvProducts.Columns["Id"].Visible = false;
+                if (dgvProducts.Columns["Description"] != null) dgvProducts.Columns["Description"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Eroare la încărcarea tabelului: {ex.Message}");
+            }
+        }
 
         // Adaugă acest eveniment pentru Detalii Produs
         private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
