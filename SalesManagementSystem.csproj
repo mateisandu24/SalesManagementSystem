@@ -63,6 +63,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AdminOrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminOrdersForm.Designer.cs">
+      <DependentUpon>AdminOrdersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CartForm.Designer.cs">
+      <DependentUpon>CartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,9 +112,18 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\OrderRepository.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utils\ConfigHelper.cs" />
+    <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Utils\ThemeManager.cs" />
+    <EmbeddedResource Include="Forms\AdminOrdersForm.resx">
+      <DependentUpon>AdminOrdersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CartForm.resx">
+      <DependentUpon>CartForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

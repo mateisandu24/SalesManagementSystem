@@ -19,7 +19,6 @@ namespace SalesManagementSystem.Repositories
             _connectionString = connectionString;
         }
 
-
         private string CleanHTML(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -66,11 +65,11 @@ namespace SalesManagementSystem.Repositories
 
                         MainCategory mainCat = MainCategory.Other;
 
-
                         if (collection.IndexOf("Picioare", StringComparison.OrdinalIgnoreCase) >= 0)
                             mainCat = MainCategory.FootCare;
 
-                        else if (collection.IndexOf("Corp", StringComparison.OrdinalIgnoreCase) >= 0 || collection.IndexOf("Body", StringComparison.OrdinalIgnoreCase) >= 0)
+                        else if (collection.IndexOf("Corp", StringComparison.OrdinalIgnoreCase) >= 0 
+                            || collection.IndexOf("Body", StringComparison.OrdinalIgnoreCase) >= 0)
                             mainCat = MainCategory.BodyCare;
 
                         else if (collection.IndexOf("Baie", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -79,8 +78,8 @@ namespace SalesManagementSystem.Repositories
 
                         SubCategory subCat = SubCategory.Other;
 
-
-                        if (name.IndexOf("Balsam", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("Loțiune", StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (name.IndexOf("Balsam", StringComparison.OrdinalIgnoreCase) >= 0 
+                            || name.IndexOf("Loțiune", StringComparison.OrdinalIgnoreCase) >= 0)
                             subCat = SubCategory.Lotion;
 
                         else if (name.IndexOf("Exfoliant", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -89,16 +88,19 @@ namespace SalesManagementSystem.Repositories
                         else if (name.IndexOf("Gel de duș", StringComparison.OrdinalIgnoreCase) >= 0)
                             subCat = SubCategory.ShowerGel;
 
-                        else if (name.IndexOf("Săpun", StringComparison.OrdinalIgnoreCase) >= 0 || name.IndexOf("Soaps", StringComparison.OrdinalIgnoreCase) >= 0)
+                        else if (name.IndexOf("Săpun", StringComparison.OrdinalIgnoreCase) >= 0 
+                            || name.IndexOf("Soaps", StringComparison.OrdinalIgnoreCase) >= 0)
                             subCat = SubCategory.Soap;
 
 
                         decimal.TryParse(fields[8], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal rawPrice);
                         decimal finalPrice = Math.Max(10m, Math.Min(200m, rawPrice));
 
+
                         string sql = @"
                     INSERT INTO Products (Name, Description, ImageUrl, Price, Stock, Vat, MainCategory, SubCategory, Brand) 
                     VALUES (@Name, @Description, @ImageUrl, @Price, @Stock, @Vat, @MainCategory, @SubCategory, @Brand)";
+
 
                         connection.Execute(sql, new
                         {

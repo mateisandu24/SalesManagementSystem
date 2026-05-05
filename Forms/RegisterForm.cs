@@ -13,8 +13,11 @@ namespace SalesManagementSystem
         public RegisterForm()
         {
             InitializeComponent();
+
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
+
             Utils.ThemeManager.ApplyTheme(this);
+
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
         }
@@ -28,15 +31,18 @@ namespace SalesManagementSystem
                 string.IsNullOrWhiteSpace(txtEmail.Text))
             {
                 MessageBox.Show("Te rugăm să completezi toate câmpurile obligatorii!", "Atenție");
+
                 return;
             }
 
             if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Parolele introduse nu coincid!", "Eroare Validare");
+
                 txtPassword.Clear();
                 txtConfirmPassword.Clear();
                 txtPassword.Focus();
+
                 return;
             }
 
@@ -60,6 +66,7 @@ namespace SalesManagementSystem
                 if (success)
                 {
                     MessageBox.Show("Contul a fost creat cu succes!", "Succes");
+
                     this.Close();
                 }
                 else

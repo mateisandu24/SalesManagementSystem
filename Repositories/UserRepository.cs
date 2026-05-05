@@ -17,7 +17,6 @@ namespace SalesManagementSystem.Repositories
             _connectionString = connectionString;
         }
 
-        ///hash algorithm (SHA256)
         private string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())
@@ -50,6 +49,7 @@ namespace SalesManagementSystem.Repositories
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+
                 using (var transaction = connection.BeginTransaction())
                 {
                     try
@@ -59,10 +59,12 @@ namespace SalesManagementSystem.Repositories
                         string customerSql = @"INSERT INTO Customers (FirstName, LastName, Email) 
                                        OUTPUT INSERTED.Id 
                                        VALUES (@FirstName, @LastName, @Email)";
+
                         var customerId = connection.QuerySingle<Guid>(customerSql, customer, transaction);
 
                         string userSql = @"INSERT INTO Users (Username, PasswordHash, Role) 
                                    VALUES (@Username, @PasswordHash, @Role)";
+
                         connection.Execute(userSql, new
                         {
                             Username = user.Username,
@@ -71,11 +73,13 @@ namespace SalesManagementSystem.Repositories
                         }, transaction);
 
                         transaction.Commit();
+
                         return true;
                     }
                     catch
                     {
                         transaction.Rollback();
+
                         return false;
                     }
                 }

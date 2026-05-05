@@ -40,9 +40,10 @@ namespace SalesManagementSystem
             // 
             // pbProductImage
             // 
-            this.pbProductImage.Location = new System.Drawing.Point(12, 12);
+            this.pbProductImage.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pbProductImage.Location = new System.Drawing.Point(0, 0);
             this.pbProductImage.Name = "pbProductImage";
-            this.pbProductImage.Size = new System.Drawing.Size(261, 181);
+            this.pbProductImage.Size = new System.Drawing.Size(475, 199);
             this.pbProductImage.TabIndex = 0;
             this.pbProductImage.TabStop = false;
             // 
@@ -78,33 +79,35 @@ namespace SalesManagementSystem
             this.richTextBox1.Location = new System.Drawing.Point(12, 270);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(260, 50);
+            this.richTextBox1.Size = new System.Drawing.Size(451, 50);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
             // btnAction
             // 
-            this.btnAction.Location = new System.Drawing.Point(118, 335);
+            this.btnAction.Location = new System.Drawing.Point(247, 335);
             this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(75, 23);
+            this.btnAction.Size = new System.Drawing.Size(105, 23);
             this.btnAction.TabIndex = 5;
             this.btnAction.Text = " Adaugă";
             this.btnAction.UseVisualStyleBackColor = true;
+            this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(199, 335);
+            this.btnBack.Location = new System.Drawing.Point(358, 335);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.Size = new System.Drawing.Size(105, 23);
             this.btnBack.TabIndex = 6;
             this.btnBack.Text = "Înapoi";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // ProductDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 374);
+            this.ClientSize = new System.Drawing.Size(475, 374);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.richTextBox1);

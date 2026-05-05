@@ -12,17 +12,18 @@ namespace SalesManagementSystem
         public ProductDetailsForm(Product product, Role userRole)
         {
             InitializeComponent();
+
             _product = product;
+
             Utils.ThemeManager.ApplyTheme(this);
+
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-
 
             lblProductname.Text = product.Name;
             lblPrice.Text = $"Preț: {product.Price} RON";
             lblBrand.Text = $"Brand: {product.Brand}";
             richTextBox1.Text = product.Description;
-
 
             if (!string.IsNullOrEmpty(product.ImageUrl))
             {
@@ -56,14 +57,23 @@ namespace SalesManagementSystem
 
         private void btnAction_Click(object sender, EventArgs e)
         {
+            if(_product != null)
+            {
+                ShoppingCart.Add(_product);
 
-            MessageBox.Show($"{_product.Name} a fost adăugat în coș!", "Succes");
-            this.Close();
+                MessageBox.Show($"'{_product.Name}' a fost adăugat în coș!",
+                        "Succes",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                this.Close();
+            }
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close(); 
         }
+
     }
 }

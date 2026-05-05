@@ -2,8 +2,8 @@ using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
+
 
 namespace SalesManagementSystem
 {
@@ -15,26 +15,39 @@ namespace SalesManagementSystem
         public Form1(User user)
         {
             InitializeComponent();
+            Utils.ThemeManager.ApplyTheme(this);
+
+            dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             _currentUser = user;
-            _productRepo = new ProductRepository(Utils.ConfigHelper.ConnectionString);
+            _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
 
             RefreshProductList();
+
 
             if (_currentUser.Role == Role.User)
             {
                 btnImport.Visible = false;
                 btnDelete.Visible = false;
+                btnViewOrders.Visible = false; 
+                btnViewCart.Visible = true;    
             }
 
-            Utils.ThemeManager.ApplyTheme(this);
-            SetupLayout();
+            else if (_currentUser.Role == Role.Admin)
+            {
+                btnViewCart.Visible = false;   
+                btnViewOrders.Visible = true;  
+            }
         }
 
         private void SetupLayout()
         {
             this.MinimumSize = new System.Drawing.Size(800, 500);
+
             dgvProducts.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            
             btnImport.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            
             if (btnDelete != null)
             {
                 btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
@@ -44,7 +57,9 @@ namespace SalesManagementSystem
         private void SetupPermissions()
         {
             bool isAdmin = _currentUser.Role == Role.Admin;
+            
             btnImport.Visible = isAdmin; 
+            
             this.Text = isAdmin ? "Sales System - Admin Mode" : "Sales System - Shop Mode";
         }
         private void btnImport_Click(object sender, EventArgs e)
@@ -61,11 +76,16 @@ namespace SalesManagementSystem
             {
                 var products = _productRepo.GetAll();
 
-                dgvProducts.DataSource = null;
                 dgvProducts.DataSource = products;
 
-                if (dgvProducts.Columns["Id"] != null) dgvProducts.Columns["Id"].Visible = false;
-                if (dgvProducts.Columns["Description"] != null) dgvProducts.Columns["Description"].Visible = false;
+                if (dgvProducts.Columns["Id"] != null)
+                    dgvProducts.Columns["Id"].Visible = false;
+                
+                if (dgvProducts.Columns["Description"] != null)
+                    dgvProducts.Columns["Description"].Visible = false;
+
+                dgvProducts.Refresh();
+
             }
             catch (Exception ex)
             {
@@ -79,6 +99,7 @@ namespace SalesManagementSystem
             {
                 var product = (Product)dgvProducts.Rows[e.RowIndex].DataBoundItem;
                 var details = new ProductDetailsForm(product, _currentUser.Role);
+
                 details.ShowDialog();
             }
         }
@@ -86,6 +107,7 @@ namespace SalesManagementSystem
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             Application.Exit();
+
             base.OnFormClosed(e);
         }
 
@@ -116,5 +138,18 @@ namespace SalesManagementSystem
             }
         }
 
+        private void btnViewCart_Click(object sender, EventArgs e)
+        {
+            Forms.CartForm cartForm = new Forms.CartForm(_currentUser);
+
+            cartForm.ShowDialog();
+        }
+
+        private void btnViewOrders_Click(object sender, EventArgs e)
+        {
+            Forms.AdminOrdersForm ordersForm = new Forms.AdminOrdersForm();
+
+            ordersForm.ShowDialog();
+        }
     }
 }

@@ -14,7 +14,9 @@ namespace SalesManagementSystem
             InitializeComponent();
 
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
+
             Utils.ThemeManager.ApplyTheme(this);
+
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
         }
@@ -38,6 +40,7 @@ namespace SalesManagementSystem
             if (string.IsNullOrWhiteSpace(txtFilePath.Text))
             {
                 MessageBox.Show("Te rugăm să selectezi un fișier mai întâi!", "Atenție");
+
                 return;
             }
 
@@ -48,12 +51,15 @@ namespace SalesManagementSystem
                 _productRepo.ImportFromCSV(txtFilePath.Text);
 
                 Cursor = Cursors.Default;
+
                 MessageBox.Show("Importul a fost finalizat cu succes!", "Succes");
+
                 this.Close(); 
             }
             catch (Exception ex)
             {
                 Cursor = Cursors.Default;
+
                 MessageBox.Show($"Eroare la import: {ex.Message}", "Eroare Critică");
             }
         }

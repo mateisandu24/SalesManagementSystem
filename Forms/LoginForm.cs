@@ -1,10 +1,10 @@
-using SalesManagementSystem.Models;
+﻿using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
 using System.Windows.Forms;
 
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms
 {
     public partial class LoginForm : Form
     {
@@ -13,8 +13,11 @@ namespace SalesManagementSystem
         public LoginForm()
         {
             InitializeComponent();
+
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
+
             Utils.ThemeManager.ApplyTheme(this);
+
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
         }
@@ -26,7 +29,8 @@ namespace SalesManagementSystem
 
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Please enter both username and password.");
+                MessageBox.Show("Vă rugăm sa reintroduceti usernameul și parola.");
+
                 return;
             }
 
@@ -34,14 +38,15 @@ namespace SalesManagementSystem
 
             if (loggedUser != null)
             {
-
                 Form1 mainForm = new Form1(loggedUser);
+
                 mainForm.Show();
+                
                 this.Hide(); 
             }
             else
             {
-                MessageBox.Show("Invalid credentials!");
+                MessageBox.Show("Date invalide!");
             }
         }
         private void btnCreate_Click(object sender, EventArgs e)

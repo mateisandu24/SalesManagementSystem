@@ -1,4 +1,4 @@
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms
 {
     partial class LoginForm
     {
@@ -38,14 +38,14 @@ namespace SalesManagementSystem
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(73, 23);
+            this.txtUsername.Location = new System.Drawing.Point(73, 26);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(254, 20);
             this.txtUsername.TabIndex = 0;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(73, 48);
+            this.txtPassword.Location = new System.Drawing.Point(73, 51);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(254, 20);
             this.txtPassword.TabIndex = 1;
@@ -70,9 +70,9 @@ namespace SalesManagementSystem
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(171, 87);
+            this.btnLogin.Location = new System.Drawing.Point(111, 86);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.Size = new System.Drawing.Size(105, 23);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@ namespace SalesManagementSystem
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(252, 87);
+            this.btnCreate.Location = new System.Drawing.Point(222, 86);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(75, 23);
+            this.btnCreate.Size = new System.Drawing.Size(105, 23);
             this.btnCreate.TabIndex = 6;
             this.btnCreate.Text = "Creere cont";
             this.btnCreate.UseVisualStyleBackColor = true;
