@@ -8,34 +8,34 @@ namespace SalesManagementSystem.Models
 {
     public enum Role
     {
-        Admin,
-        User
+        Admin = 1,
+        User = 2
     }
 
     public enum Brand
     {
-        ScottishFineSoaps,
-        BrandArkhitekts,
-        SuperFacialist,
-        Polaar,
-        SkinnyTan,
-        Other
+        ScottishFineSoaps = 1,
+        BrandArkhitekts = 2,
+        SuperFacialist = 3,
+        Polaar = 4,
+        SkinnyTan = 5,
+        Other = 6
     }
 
     public enum MainCategory
     {
-        BodyCare,
-        FootCare,
-        Bath,
-        Other
+        BodyCare = 1,
+        FootCare = 2,
+        Bath = 3,
+        Other = 4
     }
 
     public enum SubCategory
     {
-        Lotion,
-        Scrub,
-        ShowerGel,
-        Soap,
-        Other
+        Lotion = 1,
+        Scrub = 2,
+        ShowerGel = 3,
+        Soap = 4,
+        Other = 5
     }
 }

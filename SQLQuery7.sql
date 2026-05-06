@@ -1,27 +1,25 @@
 ﻿USE SalesManagementSystem;
 GO
 
--- 1. Ștergem tabelele existente pentru a evita conflictele (în ordinea corectă a dependențelor)
+-- 1. Ștergerea în ordinea inversă a dependențelor
 DROP TABLE IF EXISTS OrderItems;
-DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Transactions;
+DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS Customers;
 DROP TABLE IF EXISTS Users;
 GO
 
--- 2. Recreem tabelele folosind INT pentru Enum-uri
+-- 2. Crearea tabelelor de bază (fără dependențe externe)
 
--- Roluri: 1 = Admin, 2 = User
 CREATE TABLE Users (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
     Username NVARCHAR(50) UNIQUE NOT NULL,
     PasswordHash NVARCHAR(255) NOT NULL,
-    Role INT NOT NULL 
+    Role INT NOT NULL -- 1 = Admin, 2 = User
 );
 GO
 
--- Inserăm Adminul implicit (Parola este 'admin123', folosind hash-ul existent în proiect)
 INSERT INTO Users (Username, PasswordHash, Role) 
 VALUES ('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 1);
 GO
@@ -34,9 +32,6 @@ CREATE TABLE Customers (
 );
 GO
 
--- MainCategory: 1 = BodyCare, 2 = FootCare (îngrijire picioare), 3 = Bath, 4 = Other
--- SubCategory: 1 = Lotion, 2 = Scrub, 3 = ShowerGel, 4 = Soap, 5 = Other
--- Brand: 1 = ScottishFineSoaps, 2 = BrandArkhitekts, 3 = SuperFacialist, 4 = Polaar, 5 = SkinnyTan, 6 = Other
 CREATE TABLE Products (
     Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWSEQUENTIALID(),
     Name NVARCHAR(255) NOT NULL,
@@ -45,11 +40,13 @@ CREATE TABLE Products (
     Price DECIMAL(18,2) NOT NULL,
     Stock INT NOT NULL,
     Vat DECIMAL(4,2) NOT NULL,
-    MainCategory INT NOT NULL, 
+    MainCategory INT NOT NULL, -- 1 = BodyCare, 2 = FootCare (îngrijire picioare), 3 = Bath, 4 = Other
     SubCategory INT NOT NULL,  
     Brand INT NOT NULL         
 );
 GO
+
+-- 3. Crearea tabelelor cu dependențe (Foreign Keys)
 
 CREATE TABLE Orders (
     Id INT PRIMARY KEY IDENTITY(1,1),

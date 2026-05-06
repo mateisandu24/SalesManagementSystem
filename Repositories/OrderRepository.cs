@@ -7,6 +7,7 @@ using SalesManagementSystem.Models;
 
 namespace SalesManagementSystem.Repositories
 {
+
     public class OrderRepository
     {
         private readonly string _connectionString;
@@ -86,3 +87,5 @@ namespace SalesManagementSystem.Repositories
     }
 
 }
+
+

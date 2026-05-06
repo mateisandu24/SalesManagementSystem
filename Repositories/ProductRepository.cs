@@ -110,9 +110,9 @@ namespace SalesManagementSystem.Repositories
                             Price = finalPrice,
                             Stock = 20,
                             Vat = 0.21m,
-                            MainCategory = mainCat.ToString(),
-                            SubCategory = subCat.ToString(),
-                            Brand = brandEnum.ToString()
+                            MainCategory = (int)mainCat,
+                            SubCategory = (int)subCat,
+                            Brand = (int)brandEnum
                         });
                     }
                 }
@@ -123,7 +123,7 @@ namespace SalesManagementSystem.Repositories
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                return connection.Query<Product>("SELECT * FROM Products").ToList();
+                return connection.Query<Product>("SELECT Id, Name, Description, ImageUrl, Price, Stock, Vat, MainCategory, SubCategory, Brand FROM Products").ToList();
             }
         }
 
@@ -142,9 +142,9 @@ namespace SalesManagementSystem.Repositories
                     p.Price,
                     p.Stock,
                     p.Vat,
-                    MainCategory = p.MainCategory.ToString(),
-                    SubCategory = p.SubCategory.ToString(),
-                    Brand = p.Brand.ToString()
+                    MainCategory = (int)p.MainCategory,
+                    SubCategory = (int)p.SubCategory,
+                    Brand = (int)p.Brand
                 });
             }
         }

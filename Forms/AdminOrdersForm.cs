@@ -12,6 +12,7 @@ namespace SalesManagementSystem.Forms
         public AdminOrdersForm()
         {
             InitializeComponent();
+
             _orderRepo = new OrderRepository(ConfigHelper.ConnectionString);
 
             ThemeManager.ApplyTheme(this);

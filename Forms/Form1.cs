@@ -2,7 +2,11 @@ using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using System.Net;
 
 
 namespace SalesManagementSystem
@@ -11,7 +15,7 @@ namespace SalesManagementSystem
     {
         private readonly User _currentUser; 
         private readonly ProductRepository _productRepo;
-
+        private List<Product> _allProducts = new List<Product>();
         public Form1(User user)
         {
             InitializeComponent();
@@ -39,29 +43,6 @@ namespace SalesManagementSystem
                 btnViewOrders.Visible = true;  
             }
         }
-
-        private void SetupLayout()
-        {
-            this.MinimumSize = new System.Drawing.Size(800, 500);
-
-            dgvProducts.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            
-            btnImport.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            
-            if (btnDelete != null)
-            {
-                btnDelete.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-            }
-        }
-
-        private void SetupPermissions()
-        {
-            bool isAdmin = _currentUser.Role == Role.Admin;
-            
-            btnImport.Visible = isAdmin; 
-            
-            this.Text = isAdmin ? "Sales System - Admin Mode" : "Sales System - Shop Mode";
-        }
         private void btnImport_Click(object sender, EventArgs e)
         {
             ImportForm importWindow = new ImportForm();
@@ -74,18 +55,8 @@ namespace SalesManagementSystem
         {
             try
             {
-                var products = _productRepo.GetAll();
-
-                dgvProducts.DataSource = products;
-
-                if (dgvProducts.Columns["Id"] != null)
-                    dgvProducts.Columns["Id"].Visible = false;
-                
-                if (dgvProducts.Columns["Description"] != null)
-                    dgvProducts.Columns["Description"].Visible = false;
-
-                dgvProducts.Refresh();
-
+                _allProducts = _productRepo.GetAll();
+                ApplyFilters();
             }
             catch (Exception ex)
             {
@@ -93,6 +64,111 @@ namespace SalesManagementSystem
             }
         }
 
+        private void ApplyFilters()
+        {
+            var filtered = _allProducts
+                .Where(p => string.IsNullOrEmpty(txtSearch.Text) ||
+                            p.Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                .ToList();
+
+
+            if (cmbSort.SelectedIndex == 0)
+                filtered = filtered.OrderBy(p => p.Price).ToList();
+            else if (cmbSort.SelectedIndex == 1)
+                filtered = filtered.OrderByDescending(p => p.Price).ToList();
+
+            dgvProducts.DataSource = filtered;
+            ConfigureColumns();
+
+
+            LoadImagesAsync();
+        }
+
+        private async void LoadImagesAsync()
+        {
+            string wixPrefix = "https://static.wixstatic.com/media/";
+
+
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+            var rows = dgvProducts.Rows.Cast<DataGridViewRow>().ToList();
+
+            foreach (DataGridViewRow row in rows)
+            {
+                var product = row.DataBoundItem as Product;
+                if (product != null && !string.IsNullOrEmpty(product.ImageUrl))
+                {
+                    string fullImageUrl = wixPrefix + product.ImageUrl.Trim();
+
+                    try
+                    {
+                        using (var client = new System.Net.WebClient())
+                        {
+                            client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+
+                            byte[] imageBytes = await client.DownloadDataTaskAsync(fullImageUrl);
+
+                            using (var ms = new System.IO.MemoryStream(imageBytes))
+                            {
+
+                                Image img = new Bitmap(Image.FromStream(ms));
+
+                                if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                                {
+                                    row.Cells["ImagePreview"].Value = img;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        System.Diagnostics.Debug.WriteLine($"Eroare la imaginea pentru {product.Name}: {ex.Message}");
+
+                        if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                        {
+                            row.Cells["ImagePreview"].Value = SystemIcons.Error.ToBitmap();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ConfigureColumns()
+        {
+
+            dgvProducts.RowTemplate.Height = 100;
+
+            foreach (DataGridViewColumn col in dgvProducts.Columns)
+            {
+                col.Visible = false;
+            }
+
+            if (dgvProducts.Columns["Name"] != null)
+            {
+                dgvProducts.Columns["Name"].Visible = true;
+                dgvProducts.Columns["Name"].HeaderText = "Nume Produs";
+            }
+
+            if (dgvProducts.Columns["Price"] != null)
+            {
+                dgvProducts.Columns["Price"].Visible = true;
+                dgvProducts.Columns["Price"].HeaderText = "Preț (RON)";
+            }
+
+            if (dgvProducts.Columns["ImagePreview"] == null)
+            {
+                DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
+                imgCol.Name = "ImagePreview";
+                imgCol.HeaderText = "Previzualizare";
+                imgCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
+
+
+                imgCol.Width = 100;
+
+                dgvProducts.Columns.Insert(0, imgCol);
+            }
+        }
         private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -151,5 +227,6 @@ namespace SalesManagementSystem
 
             ordersForm.ShowDialog();
         }
+
     }
 }

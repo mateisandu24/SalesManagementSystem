@@ -31,6 +31,7 @@ namespace SalesManagementSystem.Repositories
 
                 return builder.ToString();
             }
+  
         }
 
         public User Authenticate(string username, string password)
@@ -69,7 +70,7 @@ namespace SalesManagementSystem.Repositories
                         {
                             Username = user.Username,
                             PasswordHash = user.PasswordHash,
-                            Role = Role.User.ToString()
+                            Role = (int)Role.User
                         }, transaction);
 
                         transaction.Commit();

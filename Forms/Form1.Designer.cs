@@ -33,6 +33,9 @@ namespace SalesManagementSystem
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnViewCart = new System.Windows.Forms.Button();
             this.btnViewOrders = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.cmbSort = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,10 +57,10 @@ namespace SalesManagementSystem
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvProducts.Location = new System.Drawing.Point(12, 12);
+            this.dgvProducts.Location = new System.Drawing.Point(12, 35);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
-            this.dgvProducts.Size = new System.Drawing.Size(776, 383);
+            this.dgvProducts.Size = new System.Drawing.Size(776, 360);
             this.dgvProducts.TabIndex = 1;
             this.dgvProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellDoubleClick);
             // 
@@ -91,20 +94,48 @@ namespace SalesManagementSystem
             this.btnViewOrders.UseVisualStyleBackColor = true;
             this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(53, 8);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(141, 20);
+            this.txtSearch.TabIndex = 5;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(12, 11);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(35, 13);
+            this.lblSearch.TabIndex = 6;
+            this.lblSearch.Text = "Caută";
+            // 
+            // cmbSort
+            // 
+            this.cmbSort.FormattingEnabled = true;
+            this.cmbSort.Location = new System.Drawing.Point(200, 7);
+            this.cmbSort.Name = "cmbSort";
+            this.cmbSort.Size = new System.Drawing.Size(121, 21);
+            this.cmbSort.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cmbSort);
+            this.Controls.Add(this.lblSearch);
+            this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.btnViewOrders);
             this.Controls.Add(this.btnViewCart);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dgvProducts);
             this.Controls.Add(this.btnImport);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SalesManagementSystem";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -115,6 +146,9 @@ namespace SalesManagementSystem
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnViewCart;
         private System.Windows.Forms.Button btnViewOrders;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.ComboBox cmbSort;
     }
 }
 
