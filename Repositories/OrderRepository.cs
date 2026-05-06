@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -40,18 +40,101 @@ namespace SalesManagementSystem.Repositories
                             new { UserId = userId, TotalAmount = totalAmount },
                             transaction);
 
-                        var orderItemsData = items.Select(item => new
+                        foreach (var item in items)
                         {
-                            OrderId = orderId,
-                            ProductId = item.Id,
-                            Price = item.Price
-                        }).ToList();
+                            string insertItemSql = @"
+                                INSERT INTO OrderItems (OrderId, ProductId, Price) 
+                                VALUES (@OrderId, @ProductId, @Price)";
 
+                            connection.Execute(insertItemSql, new
+                            {
+                                OrderId = orderId,
+                                ProductId = item.Id,
+                                Price = item.Price
+                            }, transaction);
+
+                            // Decrement stock for each item purchased
+                            string updateStockSql = @"
+                                UPDATE Products SET Stock = Stock - 1 WHERE Id = @Id AND Stock > 0";
+
+                            connection.Execute(updateStockSql, new { Id = item.Id }, transaction);
+                        }
+
+                        transaction.Commit();
+
+                        return true;
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+
+                        throw;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Instant checkout: places an order for a single product with a specific quantity.
+        /// Decrements stock within the same transaction to ensure data integrity.
+        /// </summary>
+        public bool PlaceOrderDirect(Guid userId, Product product, int quantity)
+        {
+            if (product == null || quantity <= 0) return false;
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Verify current stock
+                        int currentStock = connection.QuerySingle<int>(
+                            "SELECT Stock FROM Products WHERE Id = @Id",
+                            new { Id = product.Id },
+                            transaction);
+
+                        if (currentStock < quantity)
+                        {
+                            transaction.Rollback();
+                            return false;
+                        }
+
+                        decimal totalAmount = product.Price * quantity;
+
+                        string insertOrderSql = @"
+                            INSERT INTO Orders (UserId, OrderDate, TotalAmount) 
+                            OUTPUT INSERTED.Id 
+                            VALUES (@UserId, GETDATE(), @TotalAmount)";
+
+                        int orderId = connection.QuerySingle<int>(
+                            insertOrderSql,
+                            new { UserId = userId, TotalAmount = totalAmount },
+                            transaction);
+
+                        // Insert one OrderItem row per unit (or a single row — here we insert one row with the total price)
                         string insertItemSql = @"
                             INSERT INTO OrderItems (OrderId, ProductId, Price) 
                             VALUES (@OrderId, @ProductId, @Price)";
 
-                        connection.Execute(insertItemSql, orderItemsData, transaction);
+                        connection.Execute(insertItemSql, new
+                        {
+                            OrderId = orderId,
+                            ProductId = product.Id,
+                            Price = totalAmount
+                        }, transaction);
+
+                        // Decrement stock
+                        string updateStockSql = @"
+                            UPDATE Products SET Stock = Stock - @Qty WHERE Id = @Id";
+
+                        connection.Execute(updateStockSql, new
+                        {
+                            Qty = quantity,
+                            Id = product.Id
+                        }, transaction);
 
                         transaction.Commit();
 
@@ -87,5 +170,3 @@ namespace SalesManagementSystem.Repositories
     }
 
 }
-
-

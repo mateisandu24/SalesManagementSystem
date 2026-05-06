@@ -127,6 +127,25 @@ namespace SalesManagementSystem.Repositories
             }
         }
 
+        public Product GetById(Guid id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return connection.QueryFirstOrDefault<Product>(
+                    "SELECT Id, Name, Description, ImageUrl, Price, Stock, Vat, MainCategory, SubCategory, Brand FROM Products WHERE Id = @Id",
+                    new { Id = id });
+            }
+        }
+
+        public void UpdateStock(Guid productId, int newStock)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute("UPDATE Products SET Stock = @Stock WHERE Id = @Id",
+                    new { Stock = newStock, Id = productId });
+            }
+        }
+
         public void Add(Product p)
         {
             using (var connection = new SqlConnection(_connectionString))

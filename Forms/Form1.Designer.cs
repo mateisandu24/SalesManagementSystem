@@ -28,26 +28,15 @@ namespace SalesManagementSystem
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnImport = new System.Windows.Forms.Button();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnViewCart = new System.Windows.Forms.Button();
-            this.btnViewOrders = new System.Windows.Forms.Button();
+            this.btnAdminDashboard = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.cmbSort = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnImport
-            // 
-            this.btnImport.Location = new System.Drawing.Point(528, 401);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(127, 37);
-            this.btnImport.TabIndex = 0;
-            this.btnImport.Text = "Importă CSV";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // dgvProducts
             // 
@@ -66,6 +55,7 @@ namespace SalesManagementSystem
             // 
             // btnDelete
             // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Location = new System.Drawing.Point(661, 401);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(127, 37);
@@ -76,6 +66,7 @@ namespace SalesManagementSystem
             // 
             // btnViewCart
             // 
+            this.btnViewCart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnViewCart.Location = new System.Drawing.Point(661, 401);
             this.btnViewCart.Name = "btnViewCart";
             this.btnViewCart.Size = new System.Drawing.Size(127, 37);
@@ -84,15 +75,16 @@ namespace SalesManagementSystem
             this.btnViewCart.UseVisualStyleBackColor = true;
             this.btnViewCart.Click += new System.EventHandler(this.btnViewCart_Click);
             // 
-            // btnViewOrders
+            // btnAdminDashboard
             // 
-            this.btnViewOrders.Location = new System.Drawing.Point(12, 401);
-            this.btnViewOrders.Name = "btnViewOrders";
-            this.btnViewOrders.Size = new System.Drawing.Size(127, 37);
-            this.btnViewOrders.TabIndex = 4;
-            this.btnViewOrders.Text = "Vezi comenzi clienți";
-            this.btnViewOrders.UseVisualStyleBackColor = true;
-            this.btnViewOrders.Click += new System.EventHandler(this.btnViewOrders_Click);
+            this.btnAdminDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAdminDashboard.Location = new System.Drawing.Point(12, 401);
+            this.btnAdminDashboard.Name = "btnAdminDashboard";
+            this.btnAdminDashboard.Size = new System.Drawing.Size(160, 37);
+            this.btnAdminDashboard.TabIndex = 4;
+            this.btnAdminDashboard.Text = "Panou Admin";
+            this.btnAdminDashboard.UseVisualStyleBackColor = true;
+            this.btnAdminDashboard.Click += new System.EventHandler(this.btnAdminDashboard_Click);
             // 
             // txtSearch
             // 
@@ -113,9 +105,10 @@ namespace SalesManagementSystem
             // cmbSort
             // 
             this.cmbSort.FormattingEnabled = true;
+            this.cmbSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSort.Location = new System.Drawing.Point(200, 7);
             this.cmbSort.Name = "cmbSort";
-            this.cmbSort.Size = new System.Drawing.Size(121, 21);
+            this.cmbSort.Size = new System.Drawing.Size(160, 21);
             this.cmbSort.TabIndex = 7;
             // 
             // Form1
@@ -126,11 +119,10 @@ namespace SalesManagementSystem
             this.Controls.Add(this.cmbSort);
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.btnViewOrders);
+            this.Controls.Add(this.btnAdminDashboard);
             this.Controls.Add(this.btnViewCart);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.dgvProducts);
-            this.Controls.Add(this.btnImport);
             this.Name = "Form1";
             this.Text = "SalesManagementSystem";
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
@@ -141,14 +133,12 @@ namespace SalesManagementSystem
 
         #endregion
 
-        private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnViewCart;
-        private System.Windows.Forms.Button btnViewOrders;
+        private System.Windows.Forms.Button btnAdminDashboard;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.ComboBox cmbSort;
     }
 }
-

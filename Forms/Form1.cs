@@ -26,31 +26,39 @@ namespace SalesManagementSystem
             _currentUser = user;
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
 
+            // Setup sort ComboBox items
+            cmbSort.Items.Clear();
+            cmbSort.Items.Add("Preț: Crescător");
+            cmbSort.Items.Add("Preț: Descrescător");
+            cmbSort.SelectedIndex = 0;
+            cmbSort.SelectedIndexChanged += (s, ev) => ApplyFilters();
+
+            // Wire up search textbox for live filtering
+            txtSearch.TextChanged += (s, ev) => ApplyFilters();
+
             RefreshProductList();
 
-
-            if (_currentUser.Role == Role.User)
+            // Role-based visibility
+            if ((int)_currentUser.Role == (int)Role.User)
             {
-                btnImport.Visible = false;
                 btnDelete.Visible = false;
-                btnViewOrders.Visible = false; 
-                btnViewCart.Visible = true;    
+                btnAdminDashboard.Visible = false;
+                btnViewCart.Visible = true;
             }
-
-            else if (_currentUser.Role == Role.Admin)
+            else if ((int)_currentUser.Role == (int)Role.Admin)
             {
-                btnViewCart.Visible = false;   
-                btnViewOrders.Visible = true;  
+                btnViewCart.Visible = false;
+                btnAdminDashboard.Visible = true;
             }
         }
-        private void btnImport_Click(object sender, EventArgs e)
+
+        private void btnAdminDashboard_Click(object sender, EventArgs e)
         {
-            ImportForm importWindow = new ImportForm();
-
-            importWindow.ShowDialog();
-
+            var adminForm = new Forms.AdminCommandsForm();
+            adminForm.ShowDialog();
             RefreshProductList();
         }
+
         private void RefreshProductList()
         {
             try
@@ -139,6 +147,11 @@ namespace SalesManagementSystem
 
             dgvProducts.RowTemplate.Height = 100;
 
+            foreach (DataGridViewRow row in dgvProducts.Rows)
+            {
+                row.Height = 100;
+            }
+
             foreach (DataGridViewColumn col in dgvProducts.Columns)
             {
                 col.Visible = false;
@@ -156,14 +169,18 @@ namespace SalesManagementSystem
                 dgvProducts.Columns["Price"].HeaderText = "Preț (RON)";
             }
 
+            if (dgvProducts.Columns["Stock"] != null)
+            {
+                dgvProducts.Columns["Stock"].Visible = true;
+                dgvProducts.Columns["Stock"].HeaderText = "Stoc";
+            }
+
             if (dgvProducts.Columns["ImagePreview"] == null)
             {
                 DataGridViewImageColumn imgCol = new DataGridViewImageColumn();
                 imgCol.Name = "ImagePreview";
                 imgCol.HeaderText = "Previzualizare";
                 imgCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
-
-
                 imgCol.Width = 100;
 
                 dgvProducts.Columns.Insert(0, imgCol);
@@ -174,9 +191,12 @@ namespace SalesManagementSystem
             if (e.RowIndex >= 0)
             {
                 var product = (Product)dgvProducts.Rows[e.RowIndex].DataBoundItem;
-                var details = new ProductDetailsForm(product, _currentUser.Role);
+                var details = new ProductDetailsForm(product, _currentUser);
 
                 details.ShowDialog();
+
+                // Refresh after returning from details (stock may have changed)
+                RefreshProductList();
             }
         }
 
@@ -219,13 +239,6 @@ namespace SalesManagementSystem
             Forms.CartForm cartForm = new Forms.CartForm(_currentUser);
 
             cartForm.ShowDialog();
-        }
-
-        private void btnViewOrders_Click(object sender, EventArgs e)
-        {
-            Forms.AdminOrdersForm ordersForm = new Forms.AdminOrdersForm();
-
-            ordersForm.ShowDialog();
         }
 
     }

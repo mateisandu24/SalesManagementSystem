@@ -1,4 +1,4 @@
-﻿USE SalesManagementSystem;
+USE SalesManagementSystem;
 GO
 
 -- 1. Ștergerea în ordinea inversă a dependențelor
@@ -38,7 +38,7 @@ CREATE TABLE Products (
     Description NVARCHAR(MAX),
     ImageUrl NVARCHAR(500),
     Price DECIMAL(18,2) NOT NULL,
-    Stock INT NOT NULL,
+    Stock INT NOT NULL DEFAULT 20,
     Vat DECIMAL(4,2) NOT NULL,
     MainCategory INT NOT NULL, -- 1 = BodyCare, 2 = FootCare (îngrijire picioare), 3 = Bath, 4 = Other
     SubCategory INT NOT NULL,  
@@ -50,7 +50,7 @@ GO
 
 CREATE TABLE Orders (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    UserId UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Users(Id), 
+    UserId UNIQUEIDENTIFIER NOT NULL FOREIGN KEY REFERENCES Users(Id), 
     OrderDate DATETIME DEFAULT GETDATE(),
     TotalAmount DECIMAL(18,2) NOT NULL
 );
@@ -60,6 +60,7 @@ CREATE TABLE OrderItems (
     Id INT PRIMARY KEY IDENTITY(1,1),
     OrderId INT NOT NULL FOREIGN KEY REFERENCES Orders(Id),
     ProductId UNIQUEIDENTIFIER NOT NULL FOREIGN KEY REFERENCES Products(Id),
+    Quantity INT NOT NULL DEFAULT 1,
     Price DECIMAL(18,2) NOT NULL
 );
 GO

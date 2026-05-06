@@ -63,6 +63,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AdminCommandsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminCommandsForm.Designer.cs">
+      <DependentUpon>AdminCommandsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminOrdersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     <Compile Include="Utils\ConfigHelper.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Utils\ThemeManager.cs" />
+    <EmbeddedResource Include="Forms\AdminCommandsForm.resx">
+      <DependentUpon>AdminCommandsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminOrdersForm.resx">
       <DependentUpon>AdminOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
