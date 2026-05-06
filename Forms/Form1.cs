@@ -92,12 +92,33 @@ namespace SalesManagementSystem
             LoadImagesAsync();
         }
 
+        private static readonly System.Net.Http.HttpClient _httpClient;
+
+        static Form1()
+        {
+            System.Net.ServicePointManager.SecurityProtocol =
+                System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
+
+            var handler = new System.Net.Http.HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+
+            _httpClient = new System.Net.Http.HttpClient(handler);
+            _httpClient.DefaultRequestHeaders.Add("User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
+            _httpClient.DefaultRequestHeaders.Add("Accept",
+                "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8");
+            _httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9,ro;q=0.8");
+            _httpClient.DefaultRequestHeaders.Add("Referer", "https://www.setandglow.ro/");
+            _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "image");
+            _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "no-cors");
+            _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "cross-site");
+        }
+
         private async void LoadImagesAsync()
         {
             string wixPrefix = "https://static.wixstatic.com/media/";
-
-
-            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
 
             var rows = dgvProducts.Rows.Cast<DataGridViewRow>().ToList();
 
@@ -110,27 +131,20 @@ namespace SalesManagementSystem
 
                     try
                     {
-                        using (var client = new System.Net.WebClient())
+                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(fullImageUrl);
+
+                        using (var ms = new System.IO.MemoryStream(imageBytes))
                         {
-                            client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
+                            Image img = new Bitmap(Image.FromStream(ms));
 
-                            byte[] imageBytes = await client.DownloadDataTaskAsync(fullImageUrl);
-
-                            using (var ms = new System.IO.MemoryStream(imageBytes))
+                            if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
                             {
-
-                                Image img = new Bitmap(Image.FromStream(ms));
-
-                                if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
-                                {
-                                    row.Cells["ImagePreview"].Value = img;
-                                }
+                                row.Cells["ImagePreview"].Value = img;
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-
                         System.Diagnostics.Debug.WriteLine($"Eroare la imaginea pentru {product.Name}: {ex.Message}");
 
                         if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
