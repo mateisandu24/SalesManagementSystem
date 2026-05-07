@@ -14,6 +14,7 @@ namespace SalesManagementSystem.Forms
         public CartForm(User user)
         {
             InitializeComponent();
+
             _currentUser = user;
 
             ThemeManager.ApplyTheme(this);
@@ -27,6 +28,7 @@ namespace SalesManagementSystem.Forms
             dgvCart.DataSource = ShoppingCart.Products;
 
             decimal total = ShoppingCart.Products.Sum(p => p.Price);
+
             lblTotal.Text = $"Total de plată: {total} RON";
         }
 
@@ -35,12 +37,14 @@ namespace SalesManagementSystem.Forms
             if (ShoppingCart.Products.Count == 0)
             {
                 MessageBox.Show("Coșul tău este gol!", "Atenție");
+
                 return;
             }
 
             try
             {
                 var orderRepo = new OrderRepository(ConfigHelper.ConnectionString);
+
                 bool success = orderRepo.PlaceOrder(_currentUser.Id, ShoppingCart.Products);
 
                 if (success)

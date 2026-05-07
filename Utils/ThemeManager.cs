@@ -54,7 +54,7 @@ namespace SalesManagementSystem.Utils
                     txt.Font = MainFont;
                     txt.BorderStyle = BorderStyle.FixedSingle;
                     txt.BackColor = ControlBackground;
-                    // TextBox height cannot be directly set without Multiline = true in standard WinForms unless you change the Font. The font change handles the height mostly.
+                  
                 }
                 else if (control is DataGridView dgv)
                 {

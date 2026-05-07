@@ -16,9 +16,11 @@ namespace SalesManagementSystem
         private readonly User _currentUser; 
         private readonly ProductRepository _productRepo;
         private List<Product> _allProducts = new List<Product>();
+
         public Form1(User user)
         {
             InitializeComponent();
+
             Utils.ThemeManager.ApplyTheme(this);
 
             dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -26,30 +28,38 @@ namespace SalesManagementSystem
             _currentUser = user;
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
 
-            // Setup sort ComboBox items
             cmbSort.Items.Clear();
             cmbSort.Items.Add("Preț: Crescător");
             cmbSort.Items.Add("Preț: Descrescător");
             cmbSort.SelectedIndex = 0;
             cmbSort.SelectedIndexChanged += (s, ev) => ApplyFilters();
 
-            // Wire up search textbox for live filtering
             txtSearch.TextChanged += (s, ev) => ApplyFilters();
 
             RefreshProductList();
 
-            // Role-based visibility
             if ((int)_currentUser.Role == (int)Role.User)
             {
-                btnDelete.Visible = false;
-                btnAdminDashboard.Visible = false;
-                btnViewCart.Visible = true;
+                ApplyUserUI();
             }
+
             else if ((int)_currentUser.Role == (int)Role.Admin)
             {
-                btnViewCart.Visible = false;
-                btnAdminDashboard.Visible = true;
+                ApplyAdminUI();
             }
+        }
+
+        private void ApplyUserUI()
+        {
+            btnDelete.Visible = false;
+            btnAdminDashboard.Visible = false;
+            btnViewCart.Visible = true;
+        }
+
+        private void ApplyAdminUI()
+        {
+            btnViewCart.Visible = false;
+            btnAdminDashboard.Visible = true;
         }
 
         private void btnAdminDashboard_Click(object sender, EventArgs e)
@@ -64,6 +74,7 @@ namespace SalesManagementSystem
             try
             {
                 _allProducts = _productRepo.GetAll();
+
                 ApplyFilters();
             }
             catch (Exception ex)
@@ -76,18 +87,23 @@ namespace SalesManagementSystem
         {
             var filtered = _allProducts
                 .Where(p => string.IsNullOrEmpty(txtSearch.Text) ||
-                            p.Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    p.Name.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                 .ToList();
 
 
             if (cmbSort.SelectedIndex == 0)
+            {
                 filtered = filtered.OrderBy(p => p.Price).ToList();
+            }
             else if (cmbSort.SelectedIndex == 1)
+            {
                 filtered = filtered.OrderByDescending(p => p.Price).ToList();
+            }
+
 
             dgvProducts.DataSource = filtered;
-            ConfigureColumns();
 
+            ConfigureColumns();
 
             LoadImagesAsync();
         }
@@ -116,48 +132,38 @@ namespace SalesManagementSystem
             _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "cross-site");
         }
 
-        /// <summary>
-        /// Resolves the ImageUrl value (from CSV/DB) into a full downloadable URL.
-        /// Handles: full http(s) URLs, wix:image:// internal format, and raw media hashes.
-        /// </summary>
         private string ResolveImageUrl(string imageUrl)
         {
             if (string.IsNullOrEmpty(imageUrl)) return "";
             
-            // Some CSVs have multiple images separated by ';' - take the first one
             int semiIdx = imageUrl.IndexOf(';');
             if (semiIdx >= 0) imageUrl = imageUrl.Substring(0, semiIdx);
 
             string trimmed = imageUrl.Trim();
 
-            // Already a full URL
             if (trimmed.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
                 trimmed.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
             {
                 return trimmed;
             }
 
-            // Wix internal format: wix:image://v1/{hash}/{filename}#originWidth=W&originHeight=H
             if (trimmed.StartsWith("wix:image://", StringComparison.OrdinalIgnoreCase))
             {
-                // Strip the "wix:image://v1/" prefix
+
                 string path = trimmed.Substring("wix:image://".Length);
                 if (path.StartsWith("v1/", StringComparison.OrdinalIgnoreCase))
                     path = path.Substring(3);
 
-                // Remove fragment (#originWidth=...) 
                 int hashIdx = path.IndexOf('#');
                 if (hashIdx >= 0)
                     path = path.Substring(0, hashIdx);
 
-                // path is now "{hash}/{filename}" — use just the hash part for direct media URL
                 string[] parts = path.Split('/');
                 string hash = parts[0];
 
                 return "https://static.wixstatic.com/media/" + hash;
             }
 
-            // Raw hash/filename — just prepend prefix; also strip any fragment
             int fragIdx = trimmed.IndexOf('#');
             if (fragIdx >= 0)
                 trimmed = trimmed.Substring(0, fragIdx);
@@ -266,7 +272,7 @@ namespace SalesManagementSystem
                 }
                 else
                 {
-                    imgCol.DefaultCellStyle.NullValue = new Bitmap(1, 1); // fallback empty transparent image instead of red X
+                    imgCol.DefaultCellStyle.NullValue = new Bitmap(1, 1);
                 }
 
                 dgvProducts.Columns.Insert(0, imgCol);
@@ -281,10 +287,10 @@ namespace SalesManagementSystem
         {
             try
             {
-                string localPath = System.IO.Path.Combine(Application.StartupPath, "images", "loading.gif");
+                string localPath = System.IO.Path.Combine(Application.StartupPath, "images", "loading.png");
                 if (System.IO.File.Exists(localPath)) return Image.FromFile(localPath);
 
-                string sourcePath = System.IO.Path.Combine(Application.StartupPath, @"..\..\images\loading.gif");
+                string sourcePath = System.IO.Path.Combine(Application.StartupPath, @"..\..\images\loading.png");
                 if (System.IO.File.Exists(sourcePath)) return Image.FromFile(sourcePath);
             }
             catch { }
@@ -299,7 +305,6 @@ namespace SalesManagementSystem
 
                 details.ShowDialog();
 
-                // Refresh after returning from details (stock may have changed)
                 RefreshProductList();
             }
         }

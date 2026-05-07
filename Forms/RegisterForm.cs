@@ -12,12 +12,10 @@ namespace SalesManagementSystem
     {
         private readonly UserRepository _userRepo;
 
-        // Regex: standard email format
         private static readonly Regex EmailRegex = new Regex(
             @"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$",
             RegexOptions.Compiled);
 
-        // Regex: min 8 chars, at least 1 uppercase, 1 lowercase, 1 digit, 1 special character
         private static readonly Regex PasswordRegex = new Regex(
             @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#+\-_.\(\)\[\]{}])[A-Za-z\d@$!%*?&#+\-_.\(\)\[\]{}]{8,}$",
             RegexOptions.Compiled);
@@ -39,7 +37,6 @@ namespace SalesManagementSystem
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // --- Field-level required checks ---
             if (string.IsNullOrWhiteSpace(txtFirstName.Text))
             {
                 MessageBox.Show("Prenumele este obligatoriu!", "Câmp obligatoriu",
@@ -64,7 +61,6 @@ namespace SalesManagementSystem
                 return;
             }
 
-            // --- Email regex validation ---
             if (!EmailRegex.IsMatch(txtEmail.Text.Trim()))
             {
                 MessageBox.Show(
@@ -115,7 +111,6 @@ namespace SalesManagementSystem
                 return;
             }
 
-            // --- Confirm password match ---
             if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show("Parolele introduse nu coincid!", "Eroare Validare",

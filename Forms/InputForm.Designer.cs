@@ -88,16 +88,16 @@ namespace SalesManagementSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 170);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnExecuteImport);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.lblImportCSV);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "ImportForm";
-            this.Text = "Import CSV — SalesManagementSystem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "7";
             this.ResumeLayout(false);
             this.PerformLayout();
 

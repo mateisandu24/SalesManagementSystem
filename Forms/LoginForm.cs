@@ -35,7 +35,9 @@ namespace SalesManagementSystem.Forms
             {
                 MessageBox.Show("Vă rugăm să introduceți username-ul.", "Câmp obligatoriu",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 txtUsername.Focus();
+                
                 return;
             }
 
@@ -43,7 +45,9 @@ namespace SalesManagementSystem.Forms
             {
                 MessageBox.Show("Vă rugăm să introduceți parola.", "Câmp obligatoriu",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
                 txtPassword.Focus();
+                
                 return;
             }
 
@@ -61,7 +65,9 @@ namespace SalesManagementSystem.Forms
             {
                 MessageBox.Show("Username sau parolă incorectă. Vă rugăm să încercați din nou.",
                     "Autentificare eșuată", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
                 txtPassword.Clear();
+                
                 txtPassword.Focus();
             }
         }

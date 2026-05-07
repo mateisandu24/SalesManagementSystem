@@ -16,6 +16,7 @@ namespace SalesManagementSystem.Forms
             _orderRepo = new OrderRepository(ConfigHelper.ConnectionString);
 
             ThemeManager.ApplyTheme(this);
+
             LoadOrders();
         }
 
@@ -28,15 +29,23 @@ namespace SalesManagementSystem.Forms
                 dgvOrders.DataSource = null;
                 dgvOrders.DataSource = orders;
 
-                dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dgvOrders.ReadOnly = true;
-                dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgvOrders.AllowUserToAddRows = false;
+                ApplyFormat(dgvOrders);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Eroare la încărcarea comenzilor: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Eroare la încărcarea comenzilor: " + ex.Message, 
+                                "Eroare", 
+                                MessageBoxButtons.OK, 
+                                MessageBoxIcon.Error);
             }
+        }
+
+        private void ApplyFormat(DataGridView dgvOrders)
+        {
+            dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvOrders.ReadOnly = true;
+            dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvOrders.AllowUserToAddRows = false;
         }
     }
 }

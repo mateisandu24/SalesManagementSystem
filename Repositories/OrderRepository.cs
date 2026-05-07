@@ -42,22 +42,9 @@ namespace SalesManagementSystem.Repositories
 
                         foreach (var item in items)
                         {
-                            string insertItemSql = @"
-                                INSERT INTO OrderItems (OrderId, ProductId, Price) 
-                                VALUES (@OrderId, @ProductId, @Price)";
+                            InsertItem(connection, orderId, item, transaction);
 
-                            connection.Execute(insertItemSql, new
-                            {
-                                OrderId = orderId,
-                                ProductId = item.Id,
-                                Price = item.Price
-                            }, transaction);
-
-                            // Decrement stock for each item purchased
-                            string updateStockSql = @"
-                                UPDATE Products SET Stock = Stock - 1 WHERE Id = @Id AND Stock > 0";
-
-                            connection.Execute(updateStockSql, new { Id = item.Id }, transaction);
+                            UpdateStock(connection,item,transaction);
                         }
 
                         transaction.Commit();
@@ -74,10 +61,28 @@ namespace SalesManagementSystem.Repositories
             }
         }
 
-        /// <summary>
-        /// Instant checkout: places an order for a single product with a specific quantity.
-        /// Decrements stock within the same transaction to ensure data integrity.
-        /// </summary>
+        public void InsertItem(SqlConnection connection, int orderId, Product item, SqlTransaction transaction)
+        {
+            string insertItemSql = @"
+                                INSERT INTO OrderItems (OrderId, ProductId, Price) 
+                                VALUES (@OrderId, @ProductId, @Price)";
+
+            connection.Execute(insertItemSql, new
+            {
+                OrderId = orderId,
+                ProductId = item.Id,
+                Price = item.Price
+            }, transaction);
+        }
+
+        public void UpdateStock(SqlConnection connection, Product item, SqlTransaction transaction)
+        {
+            string updateStockSql = @"
+                                UPDATE Products SET Stock = Stock - 1 WHERE Id = @Id AND Stock > 0";
+
+            connection.Execute(updateStockSql, new { Id = item.Id }, transaction);
+        }
+
         public bool PlaceOrderDirect(Guid userId, Product product, int quantity)
         {
             if (product == null || quantity <= 0) return false;
@@ -90,7 +95,6 @@ namespace SalesManagementSystem.Repositories
                 {
                     try
                     {
-                        // Verify current stock
                         int currentStock = connection.QuerySingle<int>(
                             "SELECT Stock FROM Products WHERE Id = @Id",
                             new { Id = product.Id },

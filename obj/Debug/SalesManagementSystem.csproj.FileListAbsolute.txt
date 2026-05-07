@@ -53,3 +53,4 @@ c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManageme
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesMan.8E186F91.Up2Date
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.exe
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
+C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.Forms.AdminCommandsForm.resources
