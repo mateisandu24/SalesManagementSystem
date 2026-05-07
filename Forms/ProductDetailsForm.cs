@@ -41,8 +41,6 @@ namespace SalesManagementSystem
                     pbProductImage.Image = SystemIcons.Error.ToBitmap();
                 }
             }
-
-            // Stock label — always visible for both roles
             SetupStockLabel();
 
             if ((int)currentUser.Role == (int)Role.Admin)
@@ -54,8 +52,6 @@ namespace SalesManagementSystem
             {
                 btnAction.Text = "Adaugă în Coș";
                 this.Text = "Detalii Produs — SalesManagementSystem";
-
-                // Setup buy controls for users
                 SetupBuyControls();
             }
         }
@@ -124,8 +120,6 @@ namespace SalesManagementSystem
                 {
                     MessageBox.Show("Comanda a fost plasată cu succes! Mulțumim!", "Succes",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Update local product stock
                     _product.Stock -= requestedQty;
                     lblStock.Text = $"Stoc disponibil: {_product.Stock}";
                     lblStock.ForeColor = _product.Stock > 0 ? Color.FromArgb(46, 125, 50) : Color.FromArgb(198, 40, 40);

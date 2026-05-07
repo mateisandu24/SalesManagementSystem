@@ -26,19 +26,16 @@ namespace SalesManagementSystem
             _currentUser = user;
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
 
-            // Setup sort ComboBox items
             cmbSort.Items.Clear();
             cmbSort.Items.Add("Preț: Crescător");
             cmbSort.Items.Add("Preț: Descrescător");
             cmbSort.SelectedIndex = 0;
             cmbSort.SelectedIndexChanged += (s, ev) => ApplyFilters();
 
-            // Wire up search textbox for live filtering
             txtSearch.TextChanged += (s, ev) => ApplyFilters();
 
             RefreshProductList();
 
-            // Role-based visibility
             if ((int)_currentUser.Role == (int)Role.User)
             {
                 btnDelete.Visible = false;
@@ -124,40 +121,33 @@ namespace SalesManagementSystem
         {
             if (string.IsNullOrEmpty(imageUrl)) return "";
             
-            // Some CSVs have multiple images separated by ';' - take the first one
             int semiIdx = imageUrl.IndexOf(';');
             if (semiIdx >= 0) imageUrl = imageUrl.Substring(0, semiIdx);
 
             string trimmed = imageUrl.Trim();
 
-            // Already a full URL
             if (trimmed.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
                 trimmed.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
             {
                 return trimmed;
             }
 
-            // Wix internal format: wix:image://v1/{hash}/{filename}#originWidth=W&originHeight=H
             if (trimmed.StartsWith("wix:image://", StringComparison.OrdinalIgnoreCase))
             {
-                // Strip the "wix:image://v1/" prefix
                 string path = trimmed.Substring("wix:image://".Length);
                 if (path.StartsWith("v1/", StringComparison.OrdinalIgnoreCase))
                     path = path.Substring(3);
 
-                // Remove fragment (#originWidth=...) 
                 int hashIdx = path.IndexOf('#');
                 if (hashIdx >= 0)
                     path = path.Substring(0, hashIdx);
 
-                // path is now "{hash}/{filename}" — use just the hash part for direct media URL
                 string[] parts = path.Split('/');
                 string hash = parts[0];
 
                 return "https://static.wixstatic.com/media/" + hash;
             }
 
-            // Raw hash/filename — just prepend prefix; also strip any fragment
             int fragIdx = trimmed.IndexOf('#');
             if (fragIdx >= 0)
                 trimmed = trimmed.Substring(0, fragIdx);
@@ -266,7 +256,7 @@ namespace SalesManagementSystem
                 }
                 else
                 {
-                    imgCol.DefaultCellStyle.NullValue = new Bitmap(1, 1); // fallback empty transparent image instead of red X
+                    imgCol.DefaultCellStyle.NullValue = new Bitmap(1, 1);
                 }
 
                 dgvProducts.Columns.Insert(0, imgCol);
@@ -299,7 +289,6 @@ namespace SalesManagementSystem
 
                 details.ShowDialog();
 
-                // Refresh after returning from details (stock may have changed)
                 RefreshProductList();
             }
         }
