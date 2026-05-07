@@ -27,7 +27,7 @@ namespace SalesManagementSystem.Forms
             var chkShowPassword = new CheckBox
             {
                 Text = "Arată parola",
-                Location = new Point(30, 170),
+                Location = new Point(30, 185),
                 AutoSize = true,
                 Font = new Font("Segoe UI", 9F),
                 ForeColor = ThemeManager.TextColor

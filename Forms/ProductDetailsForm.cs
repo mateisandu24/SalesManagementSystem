@@ -86,7 +86,7 @@ namespace SalesManagementSystem
                 Text = "Cantitate:",
                 Font = new Font("Segoe UI", 10F, FontStyle.Regular),
                 ForeColor = ThemeManager.TextColor,
-                Location = new Point(16, 462),
+                Location = new Point(richTextBox1.Left, btnAction.Top - 35),
                 AutoSize = true
             };
 
@@ -97,7 +97,7 @@ namespace SalesManagementSystem
                 Minimum = 1,
                 Maximum = Math.Max(1, _product.Stock),
                 Value = 1,
-                Location = new Point(110, 459),
+                Location = new Point(richTextBox1.Left + 80, btnAction.Top - 38),
                 Size = new Size(70, 28),
                 Font = new Font("Segoe UI", 10F)
             };
@@ -114,8 +114,8 @@ namespace SalesManagementSystem
             {
                 Name = "btnBuyNow",
                 Text = "🛒 Cumpără Acum",
-                Size = new Size(160, 35),
-                Location = new Point(16, 485),
+                Size = new Size(160, btnAction.Height),
+                Location = new Point(richTextBox1.Left, btnAction.Top),
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.FromArgb(46, 125, 50),
                 ForeColor = Color.White,
@@ -126,12 +126,7 @@ namespace SalesManagementSystem
             btnBuyNow.FlatAppearance.BorderSize = 0;
             btnBuyNow.Click += BtnBuyNow_Click;
 
-            // Position existing buttons on the same row
-            btnAction.Location = new Point(280, 485);
-            btnAction.Size = new Size(100, 35);
             btnAction.Enabled = _product.Stock > 0;
-            btnBack.Location = new Point(386, 485);
-            btnBack.Size = new Size(100, 35);
 
             this.Controls.Add(lblQuantity);
             this.Controls.Add(nudQuantity);

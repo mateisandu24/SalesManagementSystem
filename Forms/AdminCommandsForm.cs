@@ -73,12 +73,12 @@ namespace SalesManagementSystem.Forms
             {
                 Name = "btnBack",
                 Text = "Înapoi",
-                Size = new Size(300, 40),
+                Size = new Size(300, 45),
                 Location = new Point(50, 200),
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.FromArgb(200, 200, 200),
                 ForeColor = ThemeManager.TextColor,
-                Font = new Font("Segoe UI", 10F),
+                Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold),
                 Cursor = Cursors.Hand
             };
             btnBack.FlatAppearance.BorderSize = 0;

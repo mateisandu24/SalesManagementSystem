@@ -82,19 +82,19 @@ namespace SalesManagementSystem
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(16, 320);
+            this.richTextBox1.Location = new System.Drawing.Point(20, 380);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(470, 150);
+            this.richTextBox1.Size = new System.Drawing.Size(460, 60);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
             // btnAction
             // 
-            this.btnAction.Location = new System.Drawing.Point(280, 485);
+            this.btnAction.Location = new System.Drawing.Point(230, 475);
             this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(100, 35);
+            this.btnAction.Size = new System.Drawing.Size(120, 35);
             this.btnAction.TabIndex = 5;
             this.btnAction.Text = "Adaugă în Coș";
             this.btnAction.UseVisualStyleBackColor = true;
@@ -102,9 +102,9 @@ namespace SalesManagementSystem
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(386, 485);
+            this.btnBack.Location = new System.Drawing.Point(360, 475);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(100, 35);
+            this.btnBack.Size = new System.Drawing.Size(120, 35);
             this.btnBack.TabIndex = 6;
             this.btnBack.Text = "Înapoi";
             this.btnBack.UseVisualStyleBackColor = true;
