@@ -19,24 +19,11 @@ namespace SalesManagementSystem.Forms
 
             Utils.ThemeManager.ApplyTheme(this);
 
-            SetupShowPasswordToggle();
         }
 
-        private void SetupShowPasswordToggle()
+        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            var chkShowPassword = new CheckBox
-            {
-                Text = "Arată parola",
-                Location = new Point(30, 185),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 9F),
-                ForeColor = ThemeManager.TextColor
-            };
-            chkShowPassword.CheckedChanged += (s, ev) =>
-            {
-                txtPassword.PasswordChar = chkShowPassword.Checked ? '\0' : '●';
-            };
-            this.Controls.Add(chkShowPassword);
+            txtPassword.PasswordChar = chkShowPassword.Checked ? '\0' : '●';
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

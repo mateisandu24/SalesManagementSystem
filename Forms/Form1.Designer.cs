@@ -40,6 +40,9 @@ namespace SalesManagementSystem
             // 
             // dgvProducts
             // 
+            this.dgvProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProducts.AllowUserToOrderColumns = true;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -51,7 +54,7 @@ namespace SalesManagementSystem
             this.dgvProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellDoubleClick);
             // 
             // btnDelete
-            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Location = new System.Drawing.Point(661, 401);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(127, 37);
@@ -61,7 +64,7 @@ namespace SalesManagementSystem
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnViewCart
-            // 
+            this.btnViewCart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnViewCart.Location = new System.Drawing.Point(524, 401);
             this.btnViewCart.Name = "btnViewCart";
             this.btnViewCart.Size = new System.Drawing.Size(127, 37);
@@ -71,7 +74,7 @@ namespace SalesManagementSystem
             this.btnViewCart.Click += new System.EventHandler(this.btnViewCart_Click);
             // 
             // btnAdminDashboard
-            // 
+            this.btnAdminDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdminDashboard.Location = new System.Drawing.Point(12, 401);
             this.btnAdminDashboard.Name = "btnAdminDashboard";
             this.btnAdminDashboard.Size = new System.Drawing.Size(160, 37);

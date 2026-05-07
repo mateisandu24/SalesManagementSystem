@@ -29,27 +29,12 @@ namespace SalesManagementSystem
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
 
             Utils.ThemeManager.ApplyTheme(this);
-
-            SetupShowPasswordToggle();
         }
 
-        private void SetupShowPasswordToggle()
+        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            var chkShowPassword = new CheckBox
-            {
-                Text = "Arată parolele",
-                Location = new Point(30, 345),
-                AutoSize = true,
-                Font = new Font("Segoe UI", 9F),
-                ForeColor = ThemeManager.TextColor
-            };
-            chkShowPassword.CheckedChanged += (s, ev) =>
-            {
-                char ch = chkShowPassword.Checked ? '\0' : '●';
-                txtPassword.PasswordChar = ch;
-                txtConfirmPassword.PasswordChar = ch;
-            };
-            this.Controls.Add(chkShowPassword);
+            txtPassword.PasswordChar = chkShowPassword.Checked ? '\0' : '●';
+            txtConfirmPassword.PasswordChar = chkShowPassword.Checked ? '\0' : '●';
         }
 
         private void btnSave_Click(object sender, EventArgs e)

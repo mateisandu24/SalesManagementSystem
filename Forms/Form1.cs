@@ -260,6 +260,10 @@ namespace SalesManagementSystem
 
                 dgvProducts.Columns.Insert(0, imgCol);
             }
+            else
+            {
+                dgvProducts.Columns["ImagePreview"].Visible = true;
+            }
         }
         private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

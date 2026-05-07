@@ -32,6 +32,7 @@ namespace SalesManagementSystem.Forms
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
+            this.chkShowPassword = new System.Windows.Forms.CheckBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -81,9 +82,20 @@ namespace SalesManagementSystem.Forms
             this.txtPassword.Size = new System.Drawing.Size(360, 20);
             this.txtPassword.TabIndex = 1;
             // 
+            // chkShowPassword
+            // 
+            this.chkShowPassword.AutoSize = true;
+            this.chkShowPassword.Location = new System.Drawing.Point(30, 175);
+            this.chkShowPassword.Name = "chkShowPassword";
+            this.chkShowPassword.Size = new System.Drawing.Size(84, 17);
+            this.chkShowPassword.TabIndex = 2;
+            this.chkShowPassword.Text = "Arată parola";
+            this.chkShowPassword.UseVisualStyleBackColor = true;
+            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(30, 190);
+            this.btnLogin.Location = new System.Drawing.Point(30, 205);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(175, 40);
             this.btnLogin.TabIndex = 5;
@@ -93,7 +105,7 @@ namespace SalesManagementSystem.Forms
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(215, 190);
+            this.btnCreate.Location = new System.Drawing.Point(215, 205);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(175, 40);
             this.btnCreate.TabIndex = 6;
@@ -106,11 +118,12 @@ namespace SalesManagementSystem.Forms
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 250);
+            this.ClientSize = new System.Drawing.Size(420, 270);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.chkShowPassword);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblPassword);
@@ -130,6 +143,7 @@ namespace SalesManagementSystem.Forms
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.CheckBox chkShowPassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Label lblTitle;

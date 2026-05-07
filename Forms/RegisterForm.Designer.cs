@@ -34,6 +34,7 @@ namespace SalesManagementSystem
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.chkShowPassword = new System.Windows.Forms.CheckBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblLastName = new System.Windows.Forms.Label();
@@ -153,12 +154,23 @@ namespace SalesManagementSystem
             this.txtConfirmPassword.Size = new System.Drawing.Size(390, 20);
             this.txtConfirmPassword.TabIndex = 5;
             // 
+            // chkShowPassword
+            // 
+            this.chkShowPassword.AutoSize = true;
+            this.chkShowPassword.Location = new System.Drawing.Point(30, 345);
+            this.chkShowPassword.Name = "chkShowPassword";
+            this.chkShowPassword.Size = new System.Drawing.Size(91, 17);
+            this.chkShowPassword.TabIndex = 6;
+            this.chkShowPassword.Text = "Arată parolele";
+            this.chkShowPassword.UseVisualStyleBackColor = true;
+            this.chkShowPassword.CheckedChanged += new System.EventHandler(this.chkShowPassword_CheckedChanged);
+            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(30, 360);
+            this.btnSave.Location = new System.Drawing.Point(30, 375);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(390, 40);
-            this.btnSave.TabIndex = 6;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "Salvează";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -168,7 +180,7 @@ namespace SalesManagementSystem
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 420);
+            this.ClientSize = new System.Drawing.Size(450, 440);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -179,6 +191,7 @@ namespace SalesManagementSystem
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.lblLastName);
             this.Controls.Add(this.lblFirstName);
+            this.Controls.Add(this.chkShowPassword);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtConfirmPassword);
             this.Controls.Add(this.txtPassword);
@@ -201,6 +214,7 @@ namespace SalesManagementSystem
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtConfirmPassword;
+        private System.Windows.Forms.CheckBox chkShowPassword;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Label lblLastName;
