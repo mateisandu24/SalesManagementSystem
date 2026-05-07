@@ -116,43 +116,120 @@ namespace SalesManagementSystem
             _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "cross-site");
         }
 
+        /// <summary>
+        /// Resolves the ImageUrl value (from CSV/DB) into a full downloadable URL.
+        /// Handles: full http(s) URLs, wix:image:// internal format, and raw media hashes.
+        /// </summary>
+        private string ResolveImageUrl(string imageUrl)
+        {
+            string trimmed = imageUrl.Trim();
+
+            // Already a full URL
+            if (trimmed.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                trimmed.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+            {
+                return trimmed;
+            }
+
+            // Wix internal format: wix:image://v1/{hash}/{filename}#originWidth=W&originHeight=H
+            if (trimmed.StartsWith("wix:image://", StringComparison.OrdinalIgnoreCase))
+            {
+                // Strip the "wix:image://v1/" prefix
+                string path = trimmed.Substring("wix:image://".Length);
+                if (path.StartsWith("v1/", StringComparison.OrdinalIgnoreCase))
+                    path = path.Substring(3);
+
+                // Remove fragment (#originWidth=...) 
+                int hashIdx = path.IndexOf('#');
+                if (hashIdx >= 0)
+                    path = path.Substring(0, hashIdx);
+
+                // path is now "{hash}/{filename}" — use just the hash part for direct media URL
+                string[] parts = path.Split('/');
+                string hash = parts[0];
+
+                return "https://static.wixstatic.com/media/" + hash;
+            }
+
+            // Raw hash/filename — just prepend prefix; also strip any fragment
+            int fragIdx = trimmed.IndexOf('#');
+            if (fragIdx >= 0)
+                trimmed = trimmed.Substring(0, fragIdx);
+
+            return "https://static.wixstatic.com/media/" + trimmed;
+        }
+
         private async void LoadImagesAsync()
         {
-            string wixPrefix = "https://static.wixstatic.com/media/";
+            // Log the first 3 URLs to a debug file so we can inspect the actual values
+            string debugLogPath = System.IO.Path.Combine(
+                System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
+                "image_debug.log");
 
             var rows = dgvProducts.Rows.Cast<DataGridViewRow>().ToList();
+            int logCount = 0;
 
-            foreach (DataGridViewRow row in rows)
+            using (var logWriter = new System.IO.StreamWriter(debugLogPath, false))
             {
-                var product = row.DataBoundItem as Product;
-                if (product != null && !string.IsNullOrEmpty(product.ImageUrl))
+                logWriter.WriteLine($"[{DateTime.Now}] LoadImagesAsync started — {rows.Count} rows");
+
+                foreach (DataGridViewRow row in rows)
                 {
-                    string fullImageUrl = wixPrefix + product.ImageUrl.Trim();
-
-                    try
+                    var product = row.DataBoundItem as Product;
+                    if (product != null && !string.IsNullOrEmpty(product.ImageUrl))
                     {
-                        byte[] imageBytes = await _httpClient.GetByteArrayAsync(fullImageUrl);
+                        string fullImageUrl = ResolveImageUrl(product.ImageUrl);
 
-                        using (var ms = new System.IO.MemoryStream(imageBytes))
+                        // Log first few URLs for debugging
+                        if (logCount < 5)
                         {
-                            Image img = new Bitmap(Image.FromStream(ms));
+                            logWriter.WriteLine($"  RAW: [{product.ImageUrl}]");
+                            logWriter.WriteLine($"  URL: [{fullImageUrl}]");
+                            logWriter.WriteLine();
+                            logCount++;
+                        }
+
+                        try
+                        {
+                            var response = await _httpClient.GetAsync(fullImageUrl);
+
+                            if (!response.IsSuccessStatusCode)
+                            {
+                                System.Diagnostics.Debug.WriteLine(
+                                    $"HTTP {(int)response.StatusCode} pentru {product.Name}: {fullImageUrl}");
+
+                                if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                                {
+                                    row.Cells["ImagePreview"].Value = SystemIcons.Warning.ToBitmap();
+                                }
+                                continue;
+                            }
+
+                            byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
+
+                            using (var ms = new System.IO.MemoryStream(imageBytes))
+                            {
+                                Image img = new Bitmap(Image.FromStream(ms));
+
+                                if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                                {
+                                    row.Cells["ImagePreview"].Value = img;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Eroare la imaginea pentru {product.Name}: {ex.Message}");
 
                             if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
                             {
-                                row.Cells["ImagePreview"].Value = img;
+                                row.Cells["ImagePreview"].Value = SystemIcons.Error.ToBitmap();
                             }
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"Eroare la imaginea pentru {product.Name}: {ex.Message}");
-
-                        if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
-                        {
-                            row.Cells["ImagePreview"].Value = SystemIcons.Error.ToBitmap();
-                        }
-                    }
                 }
+
+                logWriter.WriteLine($"[{DateTime.Now}] LoadImagesAsync finished");
             }
         }
 

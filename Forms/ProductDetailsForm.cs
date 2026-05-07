@@ -24,10 +24,6 @@ namespace SalesManagementSystem
 
             Utils.ThemeManager.ApplyTheme(this);
 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.ClientSize = new Size(475, 440);
-
             lblProductname.Text = product.Name;
             lblPrice.Text = $"Preț: {product.Price} RON";
             lblBrand.Text = $"Brand: {product.Brand}";
@@ -50,22 +46,24 @@ namespace SalesManagementSystem
                 }
             }
 
+            // Stock label — always visible for both roles
+            SetupStockLabel();
+
             if ((int)currentUser.Role == (int)Role.Admin)
             {
-
                 btnAction.Visible = false;
-                this.Text = "Vizualizare Produs (Admin)";
+                this.Text = "Vizualizare Produs (Admin) — SalesManagementSystem";
 
-                // Admin sees stock info but no buy controls
-                SetupStockLabel();
+                // Shrink form for admin (no buy controls)
+                this.ClientSize = new Size(500, 490);
+                btnBack.Location = new Point(386, 440);
             }
             else
             {
                 btnAction.Text = "Adaugă în Coș";
-                this.Text = "Detalii Produs";
+                this.Text = "Detalii Produs — SalesManagementSystem";
 
                 // Setup buy controls for users
-                SetupStockLabel();
                 SetupBuyControls();
             }
         }
@@ -76,9 +74,9 @@ namespace SalesManagementSystem
             {
                 Name = "lblStock",
                 Text = $"Stoc disponibil: {_product.Stock}",
-                Font = new Font("Segoe UI", 10F, FontStyle.Regular),
+                Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold),
                 ForeColor = _product.Stock > 0 ? Color.FromArgb(46, 125, 50) : Color.FromArgb(198, 40, 40),
-                Location = new Point(16, 327),
+                Location = new Point(16, 430),
                 AutoSize = true
             };
             this.Controls.Add(lblStock);
@@ -92,7 +90,7 @@ namespace SalesManagementSystem
                 Text = "Cantitate:",
                 Font = new Font("Segoe UI", 10F, FontStyle.Regular),
                 ForeColor = ThemeManager.TextColor,
-                Location = new Point(16, 355),
+                Location = new Point(16, 462),
                 AutoSize = true
             };
 
@@ -103,8 +101,8 @@ namespace SalesManagementSystem
                 Minimum = 1,
                 Maximum = Math.Max(1, _product.Stock),
                 Value = 1,
-                Location = new Point(100, 353),
-                Size = new Size(70, 25),
+                Location = new Point(110, 459),
+                Size = new Size(70, 28),
                 Font = new Font("Segoe UI", 10F)
             };
 
@@ -120,8 +118,8 @@ namespace SalesManagementSystem
             {
                 Name = "btnBuyNow",
                 Text = "🛒 Cumpără Acum",
-                Size = new Size(150, 35),
-                Location = new Point(16, 390),
+                Size = new Size(160, 35),
+                Location = new Point(16, 485),
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.FromArgb(46, 125, 50),
                 ForeColor = Color.White,
@@ -132,12 +130,12 @@ namespace SalesManagementSystem
             btnBuyNow.FlatAppearance.BorderSize = 0;
             btnBuyNow.Click += BtnBuyNow_Click;
 
-            // Reposition existing buttons
-            btnAction.Location = new Point(247, 390);
-            btnAction.Size = new Size(105, 35);
+            // Position existing buttons on the same row
+            btnAction.Location = new Point(280, 485);
+            btnAction.Size = new Size(100, 35);
             btnAction.Enabled = _product.Stock > 0;
-            btnBack.Location = new Point(358, 390);
-            btnBack.Size = new Size(105, 35);
+            btnBack.Location = new Point(386, 485);
+            btnBack.Size = new Size(100, 35);
 
             this.Controls.Add(lblQuantity);
             this.Controls.Add(nudQuantity);

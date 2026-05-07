@@ -40,64 +40,78 @@ namespace SalesManagementSystem
             // 
             // pbProductImage
             // 
-            this.pbProductImage.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pbProductImage.Location = new System.Drawing.Point(0, 0);
+            this.pbProductImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbProductImage.Location = new System.Drawing.Point(12, 12);
             this.pbProductImage.Name = "pbProductImage";
-            this.pbProductImage.Size = new System.Drawing.Size(475, 199);
+            this.pbProductImage.Size = new System.Drawing.Size(476, 220);
+            this.pbProductImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbProductImage.TabIndex = 0;
             this.pbProductImage.TabStop = false;
             // 
             // lblProductname
             // 
             this.lblProductname.AutoSize = true;
-            this.lblProductname.Location = new System.Drawing.Point(13, 202);
+            this.lblProductname.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.lblProductname.Location = new System.Drawing.Point(16, 240);
+            this.lblProductname.MaximumSize = new System.Drawing.Size(470, 0);
             this.lblProductname.Name = "lblProductname";
-            this.lblProductname.Size = new System.Drawing.Size(35, 13);
+            this.lblProductname.Size = new System.Drawing.Size(51, 21);
             this.lblProductname.TabIndex = 1;
             this.lblProductname.Text = "label1";
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(13, 227);
+            this.lblPrice.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.lblPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.lblPrice.Location = new System.Drawing.Point(16, 270);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(35, 13);
+            this.lblPrice.Size = new System.Drawing.Size(46, 20);
             this.lblPrice.TabIndex = 2;
             this.lblPrice.Text = "label2";
             // 
             // lblBrand
             // 
             this.lblBrand.AutoSize = true;
-            this.lblBrand.Location = new System.Drawing.Point(13, 250);
+            this.lblBrand.Location = new System.Drawing.Point(16, 295);
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(35, 13);
+            this.lblBrand.Size = new System.Drawing.Size(41, 13);
             this.lblBrand.TabIndex = 3;
             this.lblBrand.Text = "label3";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 270);
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(16, 320);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(451, 50);
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBox1.Size = new System.Drawing.Size(470, 150);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
             // 
             // btnAction
             // 
-            this.btnAction.Location = new System.Drawing.Point(247, 335);
+            this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAction.Location = new System.Drawing.Point(280, 485);
             this.btnAction.Name = "btnAction";
-            this.btnAction.Size = new System.Drawing.Size(105, 23);
+            this.btnAction.Size = new System.Drawing.Size(100, 35);
             this.btnAction.TabIndex = 5;
-            this.btnAction.Text = " Adaugă";
+            this.btnAction.Text = "Adaugă în Coș";
             this.btnAction.UseVisualStyleBackColor = true;
             this.btnAction.Click += new System.EventHandler(this.btnAction_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(358, 335);
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBack.Location = new System.Drawing.Point(386, 485);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(105, 23);
+            this.btnBack.Size = new System.Drawing.Size(100, 35);
             this.btnBack.TabIndex = 6;
             this.btnBack.Text = "Înapoi";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -107,7 +121,11 @@ namespace SalesManagementSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(475, 374);
+            this.ClientSize = new System.Drawing.Size(500, 535);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(516, 574);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.richTextBox1);
@@ -116,7 +134,7 @@ namespace SalesManagementSystem
             this.Controls.Add(this.lblProductname);
             this.Controls.Add(this.pbProductImage);
             this.Name = "ProductDetailsForm";
-            this.Text = "ProductDetailsForm";
+            this.Text = "Detalii Produs — SalesManagementSystem";
             ((System.ComponentModel.ISupportInitialize)(this.pbProductImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

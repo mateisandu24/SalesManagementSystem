@@ -1,4 +1,4 @@
-﻿namespace SalesManagementSystem
+namespace SalesManagementSystem
 {
     partial class ImportForm
     {
@@ -37,47 +37,55 @@
             // 
             // lblImportCSV
             // 
-            this.lblImportCSV.AutoSize = true;
-            this.lblImportCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblImportCSV.Location = new System.Drawing.Point(12, 9);
+            this.lblImportCSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblImportCSV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblImportCSV.Location = new System.Drawing.Point(0, 15);
             this.lblImportCSV.Name = "lblImportCSV";
-            this.lblImportCSV.Size = new System.Drawing.Size(135, 17);
+            this.lblImportCSV.Size = new System.Drawing.Size(430, 30);
             this.lblImportCSV.TabIndex = 0;
-            this.lblImportCSV.Text = "Importă fișierul CSV:";
+            this.lblImportCSV.Text = "Importă Fișierul CSV";
+            this.lblImportCSV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtFilePath
             // 
-            this.txtFilePath.Location = new System.Drawing.Point(153, 9);
+            this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFilePath.Location = new System.Drawing.Point(30, 60);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
-            this.txtFilePath.Size = new System.Drawing.Size(159, 20);
+            this.txtFilePath.Size = new System.Drawing.Size(270, 20);
             this.txtFilePath.TabIndex = 1;
+            this.txtFilePath.PlaceholderText = "Selectează un fișier CSV...";
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(115, 35);
+            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowse.Location = new System.Drawing.Point(310, 55);
             this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(97, 42);
+            this.btnBrowse.Size = new System.Drawing.Size(90, 32);
             this.btnBrowse.TabIndex = 2;
-            this.btnBrowse.Text = "Caută";
+            this.btnBrowse.Text = "📁 Caută";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnExecuteImport
             // 
-            this.btnExecuteImport.Location = new System.Drawing.Point(218, 35);
+            this.btnExecuteImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExecuteImport.Location = new System.Drawing.Point(30, 110);
             this.btnExecuteImport.Name = "btnExecuteImport";
-            this.btnExecuteImport.Size = new System.Drawing.Size(94, 42);
+            this.btnExecuteImport.Size = new System.Drawing.Size(250, 40);
             this.btnExecuteImport.TabIndex = 3;
-            this.btnExecuteImport.Text = "Importă fișierul";
+            this.btnExecuteImport.Text = "📥 Importă Fișierul";
             this.btnExecuteImport.UseVisualStyleBackColor = true;
             this.btnExecuteImport.Click += new System.EventHandler(this.btnExecuteImport_Click);
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 35);
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBack.Location = new System.Drawing.Point(290, 110);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(97, 42);
+            this.btnBack.Size = new System.Drawing.Size(110, 40);
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "Înapoi";
             this.btnBack.UseVisualStyleBackColor = true;
@@ -87,14 +95,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 85);
+            this.ClientSize = new System.Drawing.Size(430, 170);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(446, 209);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnExecuteImport);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.txtFilePath);
             this.Controls.Add(this.lblImportCSV);
             this.Name = "ImportForm";
-            this.Text = "InputForm";
+            this.Text = "Import CSV — SalesManagementSystem";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,7 +1,8 @@
-﻿using SalesManagementSystem.Models;
+using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SalesManagementSystem.Forms
@@ -18,8 +19,24 @@ namespace SalesManagementSystem.Forms
 
             Utils.ThemeManager.ApplyTheme(this);
 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
+            SetupShowPasswordToggle();
+        }
+
+        private void SetupShowPasswordToggle()
+        {
+            var chkShowPassword = new CheckBox
+            {
+                Text = "Arată parola",
+                Location = new Point(30, 170),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = ThemeManager.TextColor
+            };
+            chkShowPassword.CheckedChanged += (s, ev) =>
+            {
+                txtPassword.PasswordChar = chkShowPassword.Checked ? '\0' : '●';
+            };
+            this.Controls.Add(chkShowPassword);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -27,10 +44,19 @@ namespace SalesManagementSystem.Forms
             string user = txtUsername.Text.Trim();
             string pass = txtPassword.Text.Trim();
 
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+            if (string.IsNullOrEmpty(user))
             {
-                MessageBox.Show("Vă rugăm sa reintroduceti usernameul și parola.");
+                MessageBox.Show("Vă rugăm să introduceți username-ul.", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUsername.Focus();
+                return;
+            }
 
+            if (string.IsNullOrEmpty(pass))
+            {
+                MessageBox.Show("Vă rugăm să introduceți parola.", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPassword.Focus();
                 return;
             }
 
@@ -46,16 +72,18 @@ namespace SalesManagementSystem.Forms
             }
             else
             {
-                MessageBox.Show("Date invalide!");
+                MessageBox.Show("Username sau parolă incorectă. Vă rugăm să încercați din nou.",
+                    "Autentificare eșuată", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Clear();
+                txtPassword.Focus();
             }
         }
+
         private void btnCreate_Click(object sender, EventArgs e)
         {
             RegisterForm regForm = new RegisterForm();
 
             regForm.ShowDialog(); 
         }
-
-
     }
 }

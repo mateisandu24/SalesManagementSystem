@@ -2,6 +2,8 @@ using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
 using System;
+using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace SalesManagementSystem
@@ -9,6 +11,16 @@ namespace SalesManagementSystem
     public partial class RegisterForm : Form
     {
         private readonly UserRepository _userRepo;
+
+        // Regex: standard email format
+        private static readonly Regex EmailRegex = new Regex(
+            @"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$",
+            RegexOptions.Compiled);
+
+        // Regex: min 8 chars, at least 1 uppercase, 1 lowercase, 1 digit, 1 special character
+        private static readonly Regex PasswordRegex = new Regex(
+            @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#+\-_.\(\)\[\]{}])[A-Za-z\d@$!%*?&#+\-_.\(\)\[\]{}]{8,}$",
+            RegexOptions.Compiled);
 
         public RegisterForm()
         {
@@ -18,26 +30,111 @@ namespace SalesManagementSystem
 
             Utils.ThemeManager.ApplyTheme(this);
 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
+            SetupShowPasswordToggle();
+        }
+
+        private void SetupShowPasswordToggle()
+        {
+            var chkShowPassword = new CheckBox
+            {
+                Text = "Arată parolele",
+                Location = new Point(30, 345),
+                AutoSize = true,
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = ThemeManager.TextColor
+            };
+            chkShowPassword.CheckedChanged += (s, ev) =>
+            {
+                char ch = chkShowPassword.Checked ? '\0' : '●';
+                txtPassword.PasswordChar = ch;
+                txtConfirmPassword.PasswordChar = ch;
+            };
+            this.Controls.Add(chkShowPassword);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
-            if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
-                string.IsNullOrWhiteSpace(txtPassword.Text) ||
-                string.IsNullOrWhiteSpace(txtFirstName.Text) ||
-                string.IsNullOrWhiteSpace(txtEmail.Text))
+            // --- Field-level required checks ---
+            if (string.IsNullOrWhiteSpace(txtFirstName.Text))
             {
-                MessageBox.Show("Te rugăm să completezi toate câmpurile obligatorii!", "Atenție");
-
+                MessageBox.Show("Prenumele este obligatoriu!", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtFirstName.Focus();
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(txtLastName.Text))
+            {
+                MessageBox.Show("Numele de familie este obligatoriu!", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLastName.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                MessageBox.Show("Adresa de email este obligatorie!", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return;
+            }
+
+            // --- Email regex validation ---
+            if (!EmailRegex.IsMatch(txtEmail.Text.Trim()))
+            {
+                MessageBox.Show(
+                    "Adresa de email nu este validă.\n\nExemplu corect: utilizator@domeniu.com",
+                    "Email invalid",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEmail.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                MessageBox.Show("Username-ul este obligatoriu!", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUsername.Focus();
+                return;
+            }
+
+            if (txtUsername.Text.Trim().Length < 3)
+            {
+                MessageBox.Show("Username-ul trebuie să aibă cel puțin 3 caractere.", "Username prea scurt",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUsername.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Parola este obligatorie!", "Câmp obligatoriu",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPassword.Focus();
+                return;
+            }
+
+            // --- Password strength regex validation ---
+            if (!PasswordRegex.IsMatch(txtPassword.Text))
+            {
+                MessageBox.Show(
+                    "Parola nu îndeplinește cerințele de securitate:\n\n" +
+                    "• Minim 8 caractere\n" +
+                    "• Cel puțin o literă mare (A-Z)\n" +
+                    "• Cel puțin o literă mică (a-z)\n" +
+                    "• Cel puțin o cifră (0-9)\n" +
+                    "• Cel puțin un caracter special (@$!%*?&# etc.)",
+                    "Parolă slabă",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPassword.Focus();
+                return;
+            }
+
+            // --- Confirm password match ---
             if (txtPassword.Text != txtConfirmPassword.Text)
             {
-                MessageBox.Show("Parolele introduse nu coincid!", "Eroare Validare");
+                MessageBox.Show("Parolele introduse nu coincid!", "Eroare Validare",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 txtPassword.Clear();
                 txtConfirmPassword.Clear();
@@ -65,18 +162,21 @@ namespace SalesManagementSystem
 
                 if (success)
                 {
-                    MessageBox.Show("Contul a fost creat cu succes!", "Succes");
+                    MessageBox.Show("Contul a fost creat cu succes!", "Succes",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Eroare: Utilizatorul sau email-ul există deja.");
+                    MessageBox.Show("Eroare: Utilizatorul sau email-ul există deja.",
+                        "Cont existent", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("A apărut o eroare neprevăzută: " + ex.Message);
+                MessageBox.Show("A apărut o eroare neprevăzută: " + ex.Message,
+                    "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace SalesManagementSystem.Forms
             InitializeComponent();
             ThemeManager.ApplyTheme(this);
 
-            this.Text = "Panou Administrare";
+            this.Text = "Panou Administrare — SalesManagementSystem";
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.StartPosition = FormStartPosition.CenterParent;
