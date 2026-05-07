@@ -149,7 +149,7 @@ namespace SalesManagementSystem
 
             if (trimmed.StartsWith("wix:image://", StringComparison.OrdinalIgnoreCase))
             {
-
+                // Strip the "wix:image://v1/" prefix
                 string path = trimmed.Substring("wix:image://".Length);
                 if (path.StartsWith("v1/", StringComparison.OrdinalIgnoreCase))
                     path = path.Substring(3);

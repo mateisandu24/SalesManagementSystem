@@ -95,7 +95,6 @@ namespace SalesManagementSystem
                 return;
             }
 
-            // --- Password strength regex validation ---
             if (!PasswordRegex.IsMatch(txtPassword.Text))
             {
                 MessageBox.Show(
