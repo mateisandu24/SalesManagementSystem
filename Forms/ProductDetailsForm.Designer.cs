@@ -35,6 +35,11 @@ namespace SalesManagementSystem
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnAction = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.lblStock = new System.Windows.Forms.Label();
+            this.lblQuantity = new System.Windows.Forms.Label();
+            this.nudQuantity = new System.Windows.Forms.NumericUpDown();
+            this.btnBuyNow = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbProductImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,12 +117,62 @@ namespace SalesManagementSystem
             // 
             // ProductDetailsForm
             // 
+                        // 
+            // lblStock
+            // 
+            this.lblStock.AutoSize = true;
+            this.lblStock.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.lblStock.Location = new System.Drawing.Point(20, 350);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(100, 19);
+            this.lblStock.TabIndex = 7;
+            this.lblStock.Text = "Stoc disponibil: ";
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblQuantity.Location = new System.Drawing.Point(20, 440);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(68, 19);
+            this.lblQuantity.TabIndex = 8;
+            this.lblQuantity.Text = "Cantitate:";
+            // 
+            // nudQuantity
+            // 
+            this.nudQuantity.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.nudQuantity.Location = new System.Drawing.Point(100, 438);
+            this.nudQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this.nudQuantity.Name = "nudQuantity";
+            this.nudQuantity.Size = new System.Drawing.Size(70, 25);
+            this.nudQuantity.TabIndex = 9;
+            this.nudQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // btnBuyNow
+            // 
+            this.btnBuyNow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(125)))), ((int)(((byte)(50)))));
+            this.btnBuyNow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBuyNow.FlatAppearance.BorderSize = 0;
+            this.btnBuyNow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuyNow.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnBuyNow.ForeColor = System.Drawing.Color.White;
+            this.btnBuyNow.Location = new System.Drawing.Point(20, 475);
+            this.btnBuyNow.Name = "btnBuyNow";
+            this.btnBuyNow.Size = new System.Drawing.Size(160, 35);
+            this.btnBuyNow.TabIndex = 10;
+            this.btnBuyNow.Text = "🛒 Cumpără Acum";
+            this.btnBuyNow.UseVisualStyleBackColor = false;
+            this.btnBuyNow.Click += new System.EventHandler(this.BtnBuyNow_Click);
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(500, 535);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+                        this.Controls.Add(this.btnBuyNow);
+            this.Controls.Add(this.nudQuantity);
+            this.Controls.Add(this.lblQuantity);
+            this.Controls.Add(this.lblStock);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.richTextBox1);
@@ -127,7 +182,8 @@ namespace SalesManagementSystem
             this.Controls.Add(this.pbProductImage);
             this.Name = "ProductDetailsForm";
             this.Text = "Detalii Produs — SalesManagementSystem";
-            ((System.ComponentModel.ISupportInitialize)(this.pbProductImage)).EndInit();
+                        ((System.ComponentModel.ISupportInitialize)(this.pbProductImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +198,9 @@ namespace SalesManagementSystem
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Label lblStock;
+        private System.Windows.Forms.Label lblQuantity;
+        private System.Windows.Forms.NumericUpDown nudQuantity;
+        private System.Windows.Forms.Button btnBuyNow;
     }
 }

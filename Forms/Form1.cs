@@ -258,12 +258,37 @@ namespace SalesManagementSystem
                 imgCol.ImageLayout = DataGridViewImageCellLayout.Zoom;
                 imgCol.Width = 100;
 
+                Image loadingImg = GetLoadingImage();
+                if (loadingImg != null)
+                {
+                    imgCol.Image = loadingImg;
+                    imgCol.DefaultCellStyle.NullValue = loadingImg;
+                }
+                else
+                {
+                    imgCol.DefaultCellStyle.NullValue = new Bitmap(1, 1); // fallback empty transparent image instead of red X
+                }
+
                 dgvProducts.Columns.Insert(0, imgCol);
             }
             else
             {
                 dgvProducts.Columns["ImagePreview"].Visible = true;
             }
+        }
+
+        private Image GetLoadingImage()
+        {
+            try
+            {
+                string localPath = System.IO.Path.Combine(Application.StartupPath, "images", "loading.gif");
+                if (System.IO.File.Exists(localPath)) return Image.FromFile(localPath);
+
+                string sourcePath = System.IO.Path.Combine(Application.StartupPath, @"..\..\images\loading.gif");
+                if (System.IO.File.Exists(sourcePath)) return Image.FromFile(sourcePath);
+            }
+            catch { }
+            return null;
         }
         private void dgvProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -11,10 +11,6 @@ namespace SalesManagementSystem
     {
         private Product _product;
         private User _currentUser;
-        private NumericUpDown nudQuantity;
-        private Button btnBuyNow;
-        private Label lblStock;
-
         public ProductDetailsForm(Product product, User currentUser)
         {
             InitializeComponent();
@@ -66,41 +62,17 @@ namespace SalesManagementSystem
 
         private void SetupStockLabel()
         {
-            lblStock = new Label
-            {
-                Name = "lblStock",
-                Text = $"Stoc disponibil: {_product.Stock}",
-                Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold),
-                ForeColor = _product.Stock > 0 ? Color.FromArgb(46, 125, 50) : Color.FromArgb(198, 40, 40),
-                Location = new Point(16, 430),
-                AutoSize = true
-            };
-            this.Controls.Add(lblStock);
+            lblStock.Text = $"Stoc disponibil: {_product.Stock}";
+            lblStock.ForeColor = _product.Stock > 0 ? Color.FromArgb(46, 125, 50) : Color.FromArgb(198, 40, 40);
         }
 
         private void SetupBuyControls()
         {
-            // Quantity label
-            var lblQuantity = new Label
-            {
-                Text = "Cantitate:",
-                Font = new Font("Segoe UI", 10F, FontStyle.Regular),
-                ForeColor = ThemeManager.TextColor,
-                Location = new Point(richTextBox1.Left, btnAction.Top - 35),
-                AutoSize = true
-            };
-
-            // Quantity numeric up/down
-            nudQuantity = new NumericUpDown
-            {
-                Name = "nudQuantity",
-                Minimum = 1,
-                Maximum = Math.Max(1, _product.Stock),
-                Value = 1,
-                Location = new Point(richTextBox1.Left + 80, btnAction.Top - 38),
-                Size = new Size(70, 28),
-                Font = new Font("Segoe UI", 10F)
-            };
+            lblQuantity.Location = new Point(richTextBox1.Left, btnAction.Top - 35);
+            
+            nudQuantity.Maximum = Math.Max(1, _product.Stock);
+            nudQuantity.Value = 1;
+            nudQuantity.Location = new Point(richTextBox1.Left + 80, btnAction.Top - 38);
 
             if (_product.Stock <= 0)
             {
@@ -109,28 +81,10 @@ namespace SalesManagementSystem
                 nudQuantity.Minimum = 0;
             }
 
-            // Buy Now button
-            btnBuyNow = new Button
-            {
-                Name = "btnBuyNow",
-                Text = "🛒 Cumpără Acum",
-                Size = new Size(160, btnAction.Height),
-                Location = new Point(richTextBox1.Left, btnAction.Top),
-                FlatStyle = FlatStyle.Flat,
-                BackColor = Color.FromArgb(46, 125, 50),
-                ForeColor = Color.White,
-                Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold),
-                Cursor = Cursors.Hand,
-                Enabled = _product.Stock > 0
-            };
-            btnBuyNow.FlatAppearance.BorderSize = 0;
-            btnBuyNow.Click += BtnBuyNow_Click;
+            btnBuyNow.Enabled = _product.Stock > 0;
+            btnBuyNow.Location = new Point(richTextBox1.Left, btnAction.Top);
 
             btnAction.Enabled = _product.Stock > 0;
-
-            this.Controls.Add(lblQuantity);
-            this.Controls.Add(nudQuantity);
-            this.Controls.Add(btnBuyNow);
         }
 
         private void BtnBuyNow_Click(object sender, EventArgs e)
