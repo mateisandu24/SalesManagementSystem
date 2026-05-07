@@ -50,7 +50,6 @@ namespace SalesManagementSystem.Forms
             this.lblTotal.TabIndex = 1;
             this.lblTotal.Text = "Total:";
             // btnCheckout
-            this.btnCheckout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckout.Location = new System.Drawing.Point(580, 10);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(200, 45);

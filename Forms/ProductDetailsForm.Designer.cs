@@ -40,8 +40,6 @@ namespace SalesManagementSystem
             // 
             // pbProductImage
             // 
-            this.pbProductImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbProductImage.Location = new System.Drawing.Point(12, 12);
             this.pbProductImage.Name = "pbProductImage";
             this.pbProductImage.Size = new System.Drawing.Size(476, 220);
@@ -82,9 +80,6 @@ namespace SalesManagementSystem
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox1.Location = new System.Drawing.Point(16, 320);
@@ -97,7 +92,6 @@ namespace SalesManagementSystem
             // 
             // btnAction
             // 
-            this.btnAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAction.Location = new System.Drawing.Point(280, 485);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(100, 35);
@@ -108,7 +102,6 @@ namespace SalesManagementSystem
             // 
             // btnBack
             // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBack.Location = new System.Drawing.Point(386, 485);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 35);
@@ -124,7 +117,6 @@ namespace SalesManagementSystem
             this.ClientSize = new System.Drawing.Size(500, 535);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(516, 574);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnAction);

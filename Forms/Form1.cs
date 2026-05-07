@@ -122,6 +122,12 @@ namespace SalesManagementSystem
         /// </summary>
         private string ResolveImageUrl(string imageUrl)
         {
+            if (string.IsNullOrEmpty(imageUrl)) return "";
+            
+            // Some CSVs have multiple images separated by ';' - take the first one
+            int semiIdx = imageUrl.IndexOf(';');
+            if (semiIdx >= 0) imageUrl = imageUrl.Substring(0, semiIdx);
+
             string trimmed = imageUrl.Trim();
 
             // Already a full URL
@@ -161,75 +167,53 @@ namespace SalesManagementSystem
 
         private async void LoadImagesAsync()
         {
-            // Log the first 3 URLs to a debug file so we can inspect the actual values
-            string debugLogPath = System.IO.Path.Combine(
-                System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location),
-                "image_debug.log");
-
             var rows = dgvProducts.Rows.Cast<DataGridViewRow>().ToList();
-            int logCount = 0;
 
-            using (var logWriter = new System.IO.StreamWriter(debugLogPath, false))
+            foreach (DataGridViewRow row in rows)
             {
-                logWriter.WriteLine($"[{DateTime.Now}] LoadImagesAsync started — {rows.Count} rows");
-
-                foreach (DataGridViewRow row in rows)
+                var product = row.DataBoundItem as Product;
+                if (product != null && !string.IsNullOrEmpty(product.ImageUrl))
                 {
-                    var product = row.DataBoundItem as Product;
-                    if (product != null && !string.IsNullOrEmpty(product.ImageUrl))
+                    string fullImageUrl = ResolveImageUrl(product.ImageUrl);
+
+                    try
                     {
-                        string fullImageUrl = ResolveImageUrl(product.ImageUrl);
+                        var response = await _httpClient.GetAsync(fullImageUrl);
 
-                        // Log first few URLs for debugging
-                        if (logCount < 5)
+                        if (!response.IsSuccessStatusCode)
                         {
-                            logWriter.WriteLine($"  RAW: [{product.ImageUrl}]");
-                            logWriter.WriteLine($"  URL: [{fullImageUrl}]");
-                            logWriter.WriteLine();
-                            logCount++;
-                        }
-
-                        try
-                        {
-                            var response = await _httpClient.GetAsync(fullImageUrl);
-
-                            if (!response.IsSuccessStatusCode)
-                            {
-                                System.Diagnostics.Debug.WriteLine(
-                                    $"HTTP {(int)response.StatusCode} pentru {product.Name}: {fullImageUrl}");
-
-                                if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
-                                {
-                                    row.Cells["ImagePreview"].Value = SystemIcons.Warning.ToBitmap();
-                                }
-                                continue;
-                            }
-
-                            byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
-
-                            using (var ms = new System.IO.MemoryStream(imageBytes))
-                            {
-                                Image img = new Bitmap(Image.FromStream(ms));
-
-                                if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
-                                {
-                                    row.Cells["ImagePreview"].Value = img;
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            System.Diagnostics.Debug.WriteLine($"Eroare la imaginea pentru {product.Name}: {ex.Message}");
+                            System.Diagnostics.Debug.WriteLine(
+                                $"HTTP {(int)response.StatusCode} pentru {product.Name}: {fullImageUrl}");
 
                             if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
                             {
-                                row.Cells["ImagePreview"].Value = SystemIcons.Error.ToBitmap();
+                                row.Cells["ImagePreview"].Value = SystemIcons.Warning.ToBitmap();
+                            }
+                            continue;
+                        }
+
+                        byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
+
+                        using (var ms = new System.IO.MemoryStream(imageBytes))
+                        {
+                            Image img = new Bitmap(Image.FromStream(ms));
+
+                            if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                            {
+                                row.Cells["ImagePreview"].Value = img;
                             }
                         }
                     }
-                }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Eroare la imaginea pentru {product.Name}: {ex.Message}");
 
-                logWriter.WriteLine($"[{DateTime.Now}] LoadImagesAsync finished");
+                        if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                        {
+                            row.Cells["ImagePreview"].Value = SystemIcons.Error.ToBitmap();
+                        }
+                    }
+                }
             }
         }
 

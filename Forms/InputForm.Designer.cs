@@ -37,8 +37,6 @@ namespace SalesManagementSystem
             // 
             // lblImportCSV
             // 
-            this.lblImportCSV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblImportCSV.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblImportCSV.Location = new System.Drawing.Point(0, 15);
             this.lblImportCSV.Name = "lblImportCSV";
@@ -49,18 +47,14 @@ namespace SalesManagementSystem
             // 
             // txtFilePath
             // 
-            this.txtFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilePath.Location = new System.Drawing.Point(30, 60);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
             this.txtFilePath.Size = new System.Drawing.Size(270, 20);
             this.txtFilePath.TabIndex = 1;
-            this.txtFilePath.PlaceholderText = "Selectează un fișier CSV...";
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.Location = new System.Drawing.Point(310, 55);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(90, 32);
@@ -71,7 +65,6 @@ namespace SalesManagementSystem
             // 
             // btnExecuteImport
             // 
-            this.btnExecuteImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExecuteImport.Location = new System.Drawing.Point(30, 110);
             this.btnExecuteImport.Name = "btnExecuteImport";
             this.btnExecuteImport.Size = new System.Drawing.Size(250, 40);
@@ -82,7 +75,6 @@ namespace SalesManagementSystem
             // 
             // btnBack
             // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBack.Location = new System.Drawing.Point(290, 110);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(110, 40);
@@ -98,7 +90,6 @@ namespace SalesManagementSystem
             this.ClientSize = new System.Drawing.Size(430, 170);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(446, 209);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnExecuteImport);

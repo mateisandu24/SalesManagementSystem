@@ -41,9 +41,6 @@ namespace SalesManagementSystem
             // dgvProducts
             // 
             this.dgvProducts.AllowUserToOrderColumns = true;
-            this.dgvProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvProducts.Location = new System.Drawing.Point(12, 35);
@@ -55,7 +52,6 @@ namespace SalesManagementSystem
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Location = new System.Drawing.Point(661, 401);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(127, 37);
@@ -66,7 +62,6 @@ namespace SalesManagementSystem
             // 
             // btnViewCart
             // 
-            this.btnViewCart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnViewCart.Location = new System.Drawing.Point(524, 401);
             this.btnViewCart.Name = "btnViewCart";
             this.btnViewCart.Size = new System.Drawing.Size(127, 37);
@@ -77,7 +72,6 @@ namespace SalesManagementSystem
             // 
             // btnAdminDashboard
             // 
-            this.btnAdminDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdminDashboard.Location = new System.Drawing.Point(12, 401);
             this.btnAdminDashboard.Name = "btnAdminDashboard";
             this.btnAdminDashboard.Size = new System.Drawing.Size(160, 37);
@@ -88,7 +82,6 @@ namespace SalesManagementSystem
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.txtSearch.Location = new System.Drawing.Point(53, 8);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(141, 20);
@@ -105,7 +98,6 @@ namespace SalesManagementSystem
             // 
             // cmbSort
             // 
-            this.cmbSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbSort.FormattingEnabled = true;
             this.cmbSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSort.Location = new System.Drawing.Point(200, 7);
@@ -118,7 +110,6 @@ namespace SalesManagementSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.MinimumSize = new System.Drawing.Size(600, 350);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Controls.Add(this.cmbSort);
             this.Controls.Add(this.lblSearch);

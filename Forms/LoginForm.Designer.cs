@@ -39,8 +39,6 @@ namespace SalesManagementSystem.Forms
             // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.lblTitle.Location = new System.Drawing.Point(0, 15);
@@ -61,8 +59,6 @@ namespace SalesManagementSystem.Forms
             // 
             // txtUsername
             // 
-            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUsername.Location = new System.Drawing.Point(30, 90);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(360, 20);
@@ -79,8 +75,6 @@ namespace SalesManagementSystem.Forms
             // 
             // txtPassword
             // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Location = new System.Drawing.Point(30, 145);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -89,7 +83,6 @@ namespace SalesManagementSystem.Forms
             // 
             // btnLogin
             // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLogin.Location = new System.Drawing.Point(30, 190);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(175, 40);
@@ -100,7 +93,6 @@ namespace SalesManagementSystem.Forms
             // 
             // btnCreate
             // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreate.Location = new System.Drawing.Point(215, 190);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(175, 40);
@@ -117,7 +109,6 @@ namespace SalesManagementSystem.Forms
             this.ClientSize = new System.Drawing.Size(420, 250);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(436, 289);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnCreate);

@@ -46,8 +46,6 @@ namespace SalesManagementSystem
             // 
             // lblTitle
             // 
-            this.lblTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.lblTitle.Location = new System.Drawing.Point(0, 12);
@@ -68,8 +66,6 @@ namespace SalesManagementSystem
             // 
             // txtFirstName
             // 
-            this.txtFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFirstName.Location = new System.Drawing.Point(30, 80);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(390, 20);
@@ -86,8 +82,6 @@ namespace SalesManagementSystem
             // 
             // txtLastName
             // 
-            this.txtLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLastName.Location = new System.Drawing.Point(30, 128);
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(390, 20);
@@ -104,8 +98,6 @@ namespace SalesManagementSystem
             // 
             // txtEmail
             // 
-            this.txtEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEmail.Location = new System.Drawing.Point(30, 176);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(390, 20);
@@ -122,8 +114,6 @@ namespace SalesManagementSystem
             // 
             // txtUsername
             // 
-            this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtUsername.Location = new System.Drawing.Point(30, 224);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(390, 20);
@@ -140,8 +130,6 @@ namespace SalesManagementSystem
             // 
             // txtPassword
             // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPassword.Location = new System.Drawing.Point(30, 272);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -159,8 +147,6 @@ namespace SalesManagementSystem
             // 
             // txtConfirmPassword
             // 
-            this.txtConfirmPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtConfirmPassword.Location = new System.Drawing.Point(30, 320);
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.PasswordChar = '●';
@@ -169,8 +155,6 @@ namespace SalesManagementSystem
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(30, 360);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(390, 40);
@@ -187,7 +171,6 @@ namespace SalesManagementSystem
             this.ClientSize = new System.Drawing.Size(450, 420);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(466, 459);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblConfirmPassword);

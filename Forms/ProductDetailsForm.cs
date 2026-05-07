@@ -53,10 +53,6 @@ namespace SalesManagementSystem
             {
                 btnAction.Visible = false;
                 this.Text = "Vizualizare Produs (Admin) — SalesManagementSystem";
-
-                // Shrink form for admin (no buy controls)
-                this.ClientSize = new Size(500, 490);
-                btnBack.Location = new Point(386, 440);
             }
             else
             {
