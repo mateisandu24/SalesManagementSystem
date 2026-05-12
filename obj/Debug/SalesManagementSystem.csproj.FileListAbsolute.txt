@@ -54,3 +54,11 @@ c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesMan.8E18
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.exe
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.pdb
 C:\Users\Matei\source\repos\2_1059_SANDU_MATEI\obj\Debug\SalesManagementSystem.Forms.AdminCommandsForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Admin.AdminCommandsForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Admin.AdminOrdersForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Client.CartForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Client.Form1.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.InOut.ImportForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.InOut.LoginForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Client.ProductDetailsForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.InOut.RegisterForm.resources
