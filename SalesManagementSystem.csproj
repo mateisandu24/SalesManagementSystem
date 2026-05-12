@@ -63,64 +63,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AdminCommandsForm.cs">
+    <Compile Include="Forms\Admin\AdminCommandsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AdminCommandsForm.Designer.cs">
+    <Compile Include="Forms\Admin\AdminCommandsForm.Designer.cs">
       <DependentUpon>AdminCommandsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AdminOrdersForm.cs">
+    <Compile Include="Forms\Admin\AdminOrdersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AdminOrdersForm.Designer.cs">
+    <Compile Include="Forms\Admin\AdminOrdersForm.Designer.cs">
       <DependentUpon>AdminOrdersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CartForm.cs">
+    <Compile Include="Forms\Client\CartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CartForm.Designer.cs">
+    <Compile Include="Forms\Client\CartForm.Designer.cs">
       <DependentUpon>CartForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ClientOrdersForm.cs">
+    <Compile Include="Forms\Client\ClientOrdersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ClientOrdersForm.Designer.cs">
+    <Compile Include="Forms\Client\ClientOrdersForm.Designer.cs">
       <DependentUpon>ClientOrdersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditProductForm.cs">
+    <Compile Include="Forms\Admin\EditProductForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EditProductForm.Designer.cs">
+    <Compile Include="Forms\Admin\EditProductForm.Designer.cs">
       <DependentUpon>EditProductForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\Client\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
+    <Compile Include="Forms\Client\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\InputForm.cs">
+    <Compile Include="Forms\InOut\InputForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\InputForm.Designer.cs">
+    <Compile Include="Forms\InOut\InputForm.Designer.cs">
       <DependentUpon>InputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoginForm.cs">
+    <Compile Include="Forms\InOut\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoginForm.Designer.cs">
+    <Compile Include="Forms\InOut\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProductDetailsForm.cs">
+    <Compile Include="Forms\Client\ProductDetailsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ProductDetailsForm.Designer.cs">
+    <Compile Include="Forms\Client\ProductDetailsForm.Designer.cs">
       <DependentUpon>ProductDetailsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RegisterForm.cs">
+    <Compile Include="Forms\InOut\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RegisterForm.Designer.cs">
+    <Compile Include="Forms\InOut\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
@@ -136,34 +136,34 @@
     <Compile Include="Utils\ConfigHelper.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Utils\ThemeManager.cs" />
-    <EmbeddedResource Include="Forms\AdminCommandsForm.resx">
+    <EmbeddedResource Include="Forms\Admin\AdminCommandsForm.resx">
       <DependentUpon>AdminCommandsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AdminOrdersForm.resx">
+    <EmbeddedResource Include="Forms\Admin\AdminOrdersForm.resx">
       <DependentUpon>AdminOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CartForm.resx">
+    <EmbeddedResource Include="Forms\Client\CartForm.resx">
       <DependentUpon>CartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ClientOrdersForm.resx">
+    <EmbeddedResource Include="Forms\Client\ClientOrdersForm.resx">
       <DependentUpon>ClientOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditProductForm.resx">
+    <EmbeddedResource Include="Forms\Admin\EditProductForm.resx">
       <DependentUpon>EditProductForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
+    <EmbeddedResource Include="Forms\Client\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\InputForm.resx">
+    <EmbeddedResource Include="Forms\InOut\InputForm.resx">
       <DependentUpon>InputForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoginForm.resx">
+    <EmbeddedResource Include="Forms\InOut\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProductDetailsForm.resx">
+    <EmbeddedResource Include="Forms\Client\ProductDetailsForm.resx">
       <DependentUpon>ProductDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RegisterForm.resx">
+    <EmbeddedResource Include="Forms\InOut\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
