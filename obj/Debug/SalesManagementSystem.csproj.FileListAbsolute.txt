@@ -39,14 +39,6 @@ c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\bin\Debug\System.Data.S
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\bin\Debug\System.Threading.Tasks.Extensions.xml
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.csproj.AssemblyReference.cache
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.AdminCommandsForm.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.AdminOrdersForm.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.CartForm.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Form1.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.ImportForm.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.LoginForm.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.ProductDetailsForm.resources
-c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.RegisterForm.resources
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Properties.Resources.resources
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.csproj.GenerateResource.cache
 c:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.csproj.CoreCompileInputs.cache

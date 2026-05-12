@@ -35,6 +35,9 @@ namespace SalesManagementSystem.Forms.Client
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.cmbSort = new System.Windows.Forms.ComboBox();
+            this.btnEditProduct = new System.Windows.Forms.Button();
+            this.btnClientOrders = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
             // 
