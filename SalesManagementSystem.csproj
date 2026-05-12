@@ -145,12 +145,7 @@
     <EmbeddedResource Include="Forms\Client\CartForm.resx">
       <DependentUpon>CartForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Client\ClientOrdersForm.resx">
-      <DependentUpon>ClientOrdersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Admin\EditProductForm.resx">
-      <DependentUpon>EditProductForm.cs</DependentUpon>
-    </EmbeddedResource>
+
     <EmbeddedResource Include="Forms\Client\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
