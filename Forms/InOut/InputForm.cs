@@ -1,9 +1,13 @@
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
+
 using System;
 using System.Windows.Forms;
 
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms.InOut
 {
     public partial class ImportForm : Form
     {
@@ -14,8 +18,6 @@ namespace SalesManagementSystem
             InitializeComponent();
 
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
-
-            Utils.ThemeManager.ApplyTheme(this);
 
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;

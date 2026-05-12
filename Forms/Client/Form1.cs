@@ -1,6 +1,10 @@
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +13,7 @@ using System.Windows.Forms;
 using System.Net;
 
 
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms.Client
 {
     public partial class Form1 : Form
     {
@@ -20,8 +24,6 @@ namespace SalesManagementSystem
         public Form1(User user)
         {
             InitializeComponent();
-
-            Utils.ThemeManager.ApplyTheme(this);
 
             dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -52,19 +54,24 @@ namespace SalesManagementSystem
         private void ApplyUserUI()
         {
             btnDelete.Visible = false;
+            btnEditProduct.Visible = false;
             btnAdminDashboard.Visible = false;
             btnViewCart.Visible = true;
+            btnClientOrders.Visible = true;
         }
 
         private void ApplyAdminUI()
         {
             btnViewCart.Visible = false;
+            btnClientOrders.Visible = false;
             btnAdminDashboard.Visible = true;
+            btnEditProduct.Visible = true;
+            btnDelete.Visible = true;
         }
 
         private void btnAdminDashboard_Click(object sender, EventArgs e)
         {
-            var adminForm = new Forms.AdminCommandsForm();
+            var adminForm = new AdminCommandsForm();
             adminForm.ShowDialog();
             RefreshProductList();
         }
@@ -308,9 +315,14 @@ namespace SalesManagementSystem
             }
         }
 
+        private bool _isLoggingOut = false;
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            Application.Exit();
+            if (!_isLoggingOut)
+            {
+                Application.Exit();
+            }
 
             base.OnFormClosed(e);
         }
@@ -344,9 +356,52 @@ namespace SalesManagementSystem
 
         private void btnViewCart_Click(object sender, EventArgs e)
         {
-            Forms.CartForm cartForm = new Forms.CartForm(_currentUser);
+            CartForm cartForm = new CartForm(_currentUser);
 
             cartForm.ShowDialog();
+        }
+
+        private void btnEditProduct_Click(object sender, EventArgs e)
+        {
+            if (dgvProducts.SelectedRows.Count > 0)
+            {
+                var selectedProduct = (Product)dgvProducts.SelectedRows[0].DataBoundItem;
+                var editForm = new EditProductForm(selectedProduct);
+                
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    RefreshProductList();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Te rugăm să selectezi un rând întreg din tabel făcând click pe marginea din stânga a rândului.", "Atenție");
+            }
+        }
+
+        private void btnClientOrders_Click(object sender, EventArgs e)
+        {
+            ClientOrdersForm clientOrdersForm = new ClientOrdersForm(_currentUser);
+            clientOrdersForm.ShowDialog();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            _isLoggingOut = true;
+            var loginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
+            
+            if (loginForm != null)
+            {
+                loginForm.Show();
+                var txtPasswordControl = loginForm.Controls.Find("txtPassword", true).FirstOrDefault() as TextBox;
+                if (txtPasswordControl != null) txtPasswordControl.Clear();
+            }
+            else
+            {
+                new LoginForm().Show();
+            }
+            
+            this.Close();
         }
 
     }

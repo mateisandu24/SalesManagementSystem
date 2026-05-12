@@ -3,9 +3,13 @@ using System.Linq;
 using System.Windows.Forms;
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
+
 using SalesManagementSystem.Repositories;
 
-namespace SalesManagementSystem.Forms
+namespace SalesManagementSystem.Forms.Client
 {
     public partial class CartForm : Form
     {
@@ -16,8 +20,6 @@ namespace SalesManagementSystem.Forms
             InitializeComponent();
 
             _currentUser = user;
-
-            ThemeManager.ApplyTheme(this);
 
             LoadCart();
         }

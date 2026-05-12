@@ -1,10 +1,14 @@
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SalesManagementSystem.Forms
+namespace SalesManagementSystem.Forms.Admin
 {
     public partial class AdminCommandsForm : Form
     {
@@ -12,9 +16,7 @@ namespace SalesManagementSystem.Forms
         {
             InitializeComponent();
 
-            ThemeManager.ApplyTheme(this);
-
-        }
+            }
 
         private void BtnBack_Click(object sender, EventArgs e)
         {

@@ -1,4 +1,4 @@
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms.InOut
 {
     partial class ImportForm
     {
@@ -98,6 +98,36 @@ namespace SalesManagementSystem
             this.Name = "ImportForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "7";
+            
+            // Theme Settings
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrowse.FlatAppearance.BorderSize = 0;
+            this.btnBrowse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
+            this.btnBrowse.ForeColor = System.Drawing.Color.White;
+            this.btnBrowse.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnBrowse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExecuteImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExecuteImport.FlatAppearance.BorderSize = 0;
+            this.btnExecuteImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
+            this.btnExecuteImport.ForeColor = System.Drawing.Color.White;
+            this.btnExecuteImport.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnExecuteImport.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblImportCSV.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
+            this.lblImportCSV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.txtFilePath.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
+            this.txtFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFilePath.BackColor = System.Drawing.Color.White;
+
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,4 +1,4 @@
-namespace SalesManagementSystem.Forms
+namespace SalesManagementSystem.Forms.Admin
 {
     partial class AdminCommandsForm
     {
@@ -106,6 +106,33 @@ namespace SalesManagementSystem.Forms
             this.Name = "AdminCommandsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Panou Administrare — SalesManagementSystem";
+            
+            // Theme Settings
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.btnImportCsv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportCsv.FlatAppearance.BorderSize = 0;
+            this.btnImportCsv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
+            this.btnImportCsv.ForeColor = System.Drawing.Color.White;
+            this.btnImportCsv.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnImportCsv.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnViewOrders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewOrders.FlatAppearance.BorderSize = 0;
+            this.btnViewOrders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
+            this.btnViewOrders.ForeColor = System.Drawing.Color.White;
+            this.btnViewOrders.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnViewOrders.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+
             this.ResumeLayout(false);
         }
 

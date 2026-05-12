@@ -171,6 +171,23 @@ namespace SalesManagementSystem.Repositories
                 return connection.Query(sql).ToList();
             }
         }
+
+        public object GetOrdersByUserId(Guid userId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string sql = @"
+            SELECT 
+                o.Id AS [Număr Comandă],
+                o.OrderDate AS [Data Comenzii],
+                o.TotalAmount AS [Total de Plată (RON)]
+            FROM Orders o
+            WHERE o.UserId = @UserId
+            ORDER BY o.OrderDate DESC";
+
+                return connection.Query(sql, new { UserId = userId }).ToList();
+            }
+        }
     }
 
 }

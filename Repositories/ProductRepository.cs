@@ -175,5 +175,37 @@ namespace SalesManagementSystem.Repositories
                 connection.Execute("DELETE FROM Products WHERE Id = @Id", new { Id = id });
             }
         }
+
+        public void Update(Product p)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string sql = @"UPDATE Products 
+                               SET Name = @Name, 
+                                   Description = @Description, 
+                                   ImageUrl = @ImageUrl, 
+                                   Price = @Price, 
+                                   Stock = @Stock, 
+                                   Vat = @Vat, 
+                                   MainCategory = @MainCategory, 
+                                   SubCategory = @SubCategory, 
+                                   Brand = @Brand 
+                               WHERE Id = @Id";
+
+                connection.Execute(sql, new
+                {
+                    p.Id,
+                    p.Name,
+                    p.Description,
+                    p.ImageUrl,
+                    p.Price,
+                    p.Stock,
+                    p.Vat,
+                    MainCategory = (int)p.MainCategory,
+                    SubCategory = (int)p.SubCategory,
+                    Brand = (int)p.Brand
+                });
+            }
+        }
     }
 }

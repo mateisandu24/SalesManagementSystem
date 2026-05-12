@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
-using SalesManagementSystem.Forms;
+using SalesManagementSystem.Forms.InOut;
 namespace SalesManagementSystem
 {
     internal static class Program

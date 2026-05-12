@@ -2,8 +2,12 @@
 using System.Windows.Forms;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
 
-namespace SalesManagementSystem.Forms 
+
+namespace SalesManagementSystem.Forms.Admin
 {
     public partial class AdminOrdersForm : Form
     {
@@ -14,8 +18,6 @@ namespace SalesManagementSystem.Forms
             InitializeComponent();
 
             _orderRepo = new OrderRepository(ConfigHelper.ConnectionString);
-
-            ThemeManager.ApplyTheme(this);
 
             LoadOrders();
         }

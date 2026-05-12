@@ -1,12 +1,16 @@
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
+
 using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms.InOut
 {
     public partial class RegisterForm : Form
     {
@@ -26,8 +30,7 @@ namespace SalesManagementSystem
 
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
 
-            Utils.ThemeManager.ApplyTheme(this);
-        }
+            }
 
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {

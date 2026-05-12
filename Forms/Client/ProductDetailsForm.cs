@@ -1,11 +1,15 @@
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.Client;
+using SalesManagementSystem.Forms.InOut;
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace SalesManagementSystem
+namespace SalesManagementSystem.Forms.Client
 {
     public partial class ProductDetailsForm : Form
     {
@@ -17,8 +21,6 @@ namespace SalesManagementSystem
 
             _product = product;
             _currentUser = currentUser;
-
-            Utils.ThemeManager.ApplyTheme(this);
 
             lblProductname.Text = product.Name;
             lblPrice.Text = $"Preț: {product.Price} RON";
