@@ -1,24 +1,22 @@
-using SalesManagementSystem.Models;
-using SalesManagementSystem.Repositories;
-using SalesManagementSystem.Utils;
-using SalesManagementSystem.Forms.Admin;
-using SalesManagementSystem.Forms.Client;
-using SalesManagementSystem.Forms.InOut;
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Net;
+using SalesManagementSystem.Forms.Admin;
+using SalesManagementSystem.Forms.InOut;
+using SalesManagementSystem.Models;
+using SalesManagementSystem.Repositories;
+using SalesManagementSystem.Utils;
 
 
 namespace SalesManagementSystem.Forms.Client
 {
     public partial class Form1 : Form
     {
-        private readonly User _currentUser; 
+        private readonly User _currentUser;
         private readonly ProductRepository _productRepo;
+        private readonly Services.IImageService _imageService;
         private List<Product> _allProducts = new List<Product>();
 
         public Form1(User user)
@@ -29,6 +27,7 @@ namespace SalesManagementSystem.Forms.Client
 
             _currentUser = user;
             _productRepo = new ProductRepository(ConfigHelper.ConnectionString);
+            _imageService = new Services.ImageService();
 
             cmbSort.Items.Clear();
             cmbSort.Items.Add("Preț: Crescător");
@@ -115,68 +114,6 @@ namespace SalesManagementSystem.Forms.Client
             LoadImagesAsync();
         }
 
-        private static readonly System.Net.Http.HttpClient _httpClient;
-
-        static Form1()
-        {
-            System.Net.ServicePointManager.SecurityProtocol =
-                System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls11;
-
-            var handler = new System.Net.Http.HttpClientHandler
-            {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-            };
-
-            _httpClient = new System.Net.Http.HttpClient(handler);
-            _httpClient.DefaultRequestHeaders.Add("User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36");
-            _httpClient.DefaultRequestHeaders.Add("Accept",
-                "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8");
-            _httpClient.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9,ro;q=0.8");
-            _httpClient.DefaultRequestHeaders.Add("Referer", "https://www.setandglow.ro/");
-            _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "image");
-            _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "no-cors");
-            _httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "cross-site");
-        }
-
-        private string ResolveImageUrl(string imageUrl)
-        {
-            if (string.IsNullOrEmpty(imageUrl)) return "";
-            
-            int semiIdx = imageUrl.IndexOf(';');
-            if (semiIdx >= 0) imageUrl = imageUrl.Substring(0, semiIdx);
-
-            string trimmed = imageUrl.Trim();
-
-            if (trimmed.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
-                trimmed.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
-            {
-                return trimmed;
-            }
-
-            if (trimmed.StartsWith("wix:image://", StringComparison.OrdinalIgnoreCase))
-            {
-                string path = trimmed.Substring("wix:image://".Length);
-                if (path.StartsWith("v1/", StringComparison.OrdinalIgnoreCase))
-                    path = path.Substring(3);
-
-                int hashIdx = path.IndexOf('#');
-                if (hashIdx >= 0)
-                    path = path.Substring(0, hashIdx);
-
-                string[] parts = path.Split('/');
-                string hash = parts[0];
-
-                return "https://static.wixstatic.com/media/" + hash;
-            }
-
-            int fragIdx = trimmed.IndexOf('#');
-            if (fragIdx >= 0)
-                trimmed = trimmed.Substring(0, fragIdx);
-
-            return "https://static.wixstatic.com/media/" + trimmed;
-        }
-
         private async void LoadImagesAsync()
         {
             var rows = dgvProducts.Rows.Cast<DataGridViewRow>().ToList();
@@ -186,33 +123,19 @@ namespace SalesManagementSystem.Forms.Client
                 var product = row.DataBoundItem as Product;
                 if (product != null && !string.IsNullOrEmpty(product.ImageUrl))
                 {
-                    string fullImageUrl = ResolveImageUrl(product.ImageUrl);
-
                     try
                     {
-                        var response = await _httpClient.GetAsync(fullImageUrl);
+                        var img = await _imageService.GetImageAsync(product.ImageUrl);
 
-                        if (!response.IsSuccessStatusCode)
+                        if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
                         {
-                            System.Diagnostics.Debug.WriteLine(
-                                $"HTTP {(int)response.StatusCode} pentru {product.Name}: {fullImageUrl}");
-
-                            if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
-                            {
-                                row.Cells["ImagePreview"].Value = SystemIcons.Warning.ToBitmap();
-                            }
-                            continue;
-                        }
-
-                        byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
-
-                        using (var ms = new System.IO.MemoryStream(imageBytes))
-                        {
-                            Image img = new Bitmap(Image.FromStream(ms));
-
-                            if (row.DataGridView != null && dgvProducts.Columns.Contains("ImagePreview"))
+                            if (img != null)
                             {
                                 row.Cells["ImagePreview"].Value = img;
+                            }
+                            else
+                            {
+                                row.Cells["ImagePreview"].Value = SystemIcons.Warning.ToBitmap();
                             }
                         }
                     }
@@ -329,7 +252,7 @@ namespace SalesManagementSystem.Forms.Client
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgvProducts.SelectedRows.Count>0)
+            if (dgvProducts.SelectedRows.Count > 0)
             {
                 var selectedProduct = (Product)dgvProducts.SelectedRows[0].DataBoundItem;
 
@@ -367,7 +290,7 @@ namespace SalesManagementSystem.Forms.Client
             {
                 var selectedProduct = (Product)dgvProducts.SelectedRows[0].DataBoundItem;
                 var editForm = new EditProductForm(selectedProduct);
-                
+
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     RefreshProductList();
@@ -389,7 +312,7 @@ namespace SalesManagementSystem.Forms.Client
         {
             _isLoggingOut = true;
             var loginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
-            
+
             if (loginForm != null)
             {
                 loginForm.Show();
@@ -400,7 +323,7 @@ namespace SalesManagementSystem.Forms.Client
             {
                 new LoginForm().Show();
             }
-            
+
             this.Close();
         }
 

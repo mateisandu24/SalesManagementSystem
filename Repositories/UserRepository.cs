@@ -1,10 +1,10 @@
-﻿using Dapper;
-using SalesManagementSystem.Models;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Dapper;
+using SalesManagementSystem.Models;
 
 namespace SalesManagementSystem.Repositories
 {
@@ -31,7 +31,7 @@ namespace SalesManagementSystem.Repositories
 
                 return builder.ToString();
             }
-  
+
         }
 
         public User Authenticate(string username, string password)
@@ -55,7 +55,7 @@ namespace SalesManagementSystem.Repositories
                 {
                     try
                     {
-                        user.PasswordHash = HashPassword(user.PasswordHash); 
+                        user.PasswordHash = HashPassword(user.PasswordHash);
 
                         string customerSql = @"INSERT INTO Customers (FirstName, LastName, Email) 
                                        OUTPUT INSERTED.Id 

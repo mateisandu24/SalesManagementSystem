@@ -1,14 +1,9 @@
+using System;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
-using SalesManagementSystem.Forms.Admin;
-using SalesManagementSystem.Forms.Client;
-using SalesManagementSystem.Forms.InOut;
-
-using System;
-using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace SalesManagementSystem.Forms.InOut
 {
@@ -30,7 +25,7 @@ namespace SalesManagementSystem.Forms.InOut
 
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
 
-            }
+        }
 
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {
@@ -128,7 +123,7 @@ namespace SalesManagementSystem.Forms.InOut
             var newUser = new User
             {
                 Username = txtUsername.Text.Trim(),
-                PasswordHash = txtPassword.Text 
+                PasswordHash = txtPassword.Text
             };
 
             var newCustomer = new Customer

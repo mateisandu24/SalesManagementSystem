@@ -19,6 +19,8 @@ namespace SalesManagementSystem.Forms.Client
 
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCart = new System.Windows.Forms.DataGridView();
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnCheckout = new System.Windows.Forms.Button();
@@ -26,94 +28,99 @@ namespace SalesManagementSystem.Forms.Client
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
+            // 
             // dgvCart
-            this.dgvCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCart.Location = new System.Drawing.Point(0, 0);
-            this.dgvCart.Name = "dgvCart";
-            this.dgvCart.Size = new System.Drawing.Size(800, 380);
-            this.dgvCart.TabIndex = 0;
-            // pnlBottom
-            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 380);
-            this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(800, 70);
-            this.pnlBottom.TabIndex = 3;
-            this.pnlBottom.Controls.Add(this.lblTotal);
-            this.pnlBottom.Controls.Add(this.btnCheckout);
-            // lblTotal
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.Location = new System.Drawing.Point(15, 20);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(50, 21);
-            this.lblTotal.TabIndex = 1;
-            this.lblTotal.Text = "Total:";
-            // btnCheckout
-            this.btnCheckout.Location = new System.Drawing.Point(580, 10);
-            this.btnCheckout.Name = "btnCheckout";
-            this.btnCheckout.Size = new System.Drawing.Size(200, 45);
-            this.btnCheckout.TabIndex = 2;
-            this.btnCheckout.Text = "Finalizează Comanda";
-            this.btnCheckout.UseVisualStyleBackColor = true;
-            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
-            // CartForm
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.dgvCart);
-            this.Controls.Add(this.pnlBottom);
-            this.Name = "CartForm";
-            this.Text = "Coșul Meu — SalesManagementSystem";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
-            this.pnlBottom.ResumeLayout(false);
-            this.pnlBottom.PerformLayout();
-            
-            // Theme Settings
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
-            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.btnCheckout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckout.FlatAppearance.BorderSize = 0;
-            this.btnCheckout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(97)))), ((int)(((byte)(238)))));
-            this.btnCheckout.ForeColor = System.Drawing.Color.White;
-            this.btnCheckout.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.btnCheckout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            // 
+            this.dgvCart.AllowUserToAddRows = false;
+            this.dgvCart.AllowUserToDeleteRows = false;
+            this.dgvCart.AllowUserToResizeRows = false;
+            this.dgvCart.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCart.BackgroundColor = System.Drawing.Color.White;
             this.dgvCart.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCart.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCart.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(41, 50, 65);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(41, 50, 65);
+            this.dgvCart.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(43, 45, 66);
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(224, 238, 255);
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvCart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCart.EnableHeadersVisualStyles = false;
-            this.dgvCart.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.dgvCart.GridColor = System.Drawing.Color.FromArgb(230, 230, 230);
+            this.dgvCart.Location = new System.Drawing.Point(0, 0);
+            this.dgvCart.Name = "dgvCart";
             this.dgvCart.RowHeadersVisible = false;
-            this.dgvCart.AllowUserToAddRows = false;
-            this.dgvCart.AllowUserToDeleteRows = false;
-            this.dgvCart.AllowUserToResizeRows = false;
-            this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCart.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            System.Windows.Forms.DataGridViewCellStyle headerStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            headerStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            headerStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
-            headerStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
-            headerStyle.ForeColor = System.Drawing.Color.White;
-            headerStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
-            this.dgvCart.ColumnHeadersDefaultCellStyle = headerStyle;
-            this.dgvCart.ColumnHeadersHeight = 40;
-            System.Windows.Forms.DataGridViewCellStyle rowStyle = new System.Windows.Forms.DataGridViewCellStyle();
-            rowStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            rowStyle.BackColor = System.Drawing.Color.White;
-            rowStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            rowStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
-            rowStyle.Padding = new System.Windows.Forms.Padding(5);
-            rowStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            rowStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.dgvCart.DefaultCellStyle = rowStyle;
             this.dgvCart.RowTemplate.Height = 35;
-
+            this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCart.Size = new System.Drawing.Size(791, 380);
+            this.dgvCart.TabIndex = 0;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(43, 45, 66);
+            this.lblTotal.Location = new System.Drawing.Point(15, 20);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(41, 19);
+            this.lblTotal.TabIndex = 1;
+            this.lblTotal.Text = "Total:";
+            // 
+            // btnCheckout
+            // 
+            this.btnCheckout.BackColor = System.Drawing.Color.FromArgb(67, 97, 238);
+            this.btnCheckout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCheckout.FlatAppearance.BorderSize = 0;
+            this.btnCheckout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheckout.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCheckout.ForeColor = System.Drawing.Color.White;
+            this.btnCheckout.Location = new System.Drawing.Point(579, 13);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(200, 45);
+            this.btnCheckout.TabIndex = 2;
+            this.btnCheckout.Text = "Finalizează Comanda";
+            this.btnCheckout.UseVisualStyleBackColor = false;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
+            // 
+            // pnlBottom
+            // 
+            this.pnlBottom.Controls.Add(this.lblTotal);
+            this.pnlBottom.Controls.Add(this.btnCheckout);
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(0, 380);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(791, 70);
+            this.pnlBottom.TabIndex = 3;
+            // 
+            // CartForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
+            this.ClientSize = new System.Drawing.Size(791, 450);
+            this.Controls.Add(this.dgvCart);
+            this.Controls.Add(this.pnlBottom);
+            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.ForeColor = System.Drawing.Color.FromArgb(43, 45, 66);
+            this.Name = "CartForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Coșul Meu — SalesManagementSystem";
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
+            this.pnlBottom.ResumeLayout(false);
+            this.pnlBottom.PerformLayout();
             this.ResumeLayout(false);
+
         }
 
         #endregion

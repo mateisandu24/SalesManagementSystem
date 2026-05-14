@@ -1,11 +1,7 @@
-using SalesManagementSystem.Repositories;
-using SalesManagementSystem.Utils;
-using SalesManagementSystem.Forms.Admin;
-using SalesManagementSystem.Forms.Client;
-using SalesManagementSystem.Forms.InOut;
-
 using System;
 using System.Windows.Forms;
+using SalesManagementSystem.Repositories;
+using SalesManagementSystem.Utils;
 
 namespace SalesManagementSystem.Forms.InOut
 {
@@ -48,7 +44,7 @@ namespace SalesManagementSystem.Forms.InOut
 
             try
             {
-                Cursor = Cursors.WaitCursor; 
+                Cursor = Cursors.WaitCursor;
 
                 _productRepo.ImportFromCSV(txtFilePath.Text);
 
@@ -56,7 +52,7 @@ namespace SalesManagementSystem.Forms.InOut
 
                 MessageBox.Show("Importul a fost finalizat cu succes!", "Succes");
 
-                this.Close(); 
+                this.Close();
             }
             catch (Exception ex)
             {

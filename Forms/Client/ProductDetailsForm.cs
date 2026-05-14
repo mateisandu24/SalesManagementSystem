@@ -1,13 +1,9 @@
-using SalesManagementSystem.Models;
-using SalesManagementSystem.Repositories;
-using SalesManagementSystem.Utils;
-using SalesManagementSystem.Forms.Admin;
-using SalesManagementSystem.Forms.Client;
-using SalesManagementSystem.Forms.InOut;
-
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SalesManagementSystem.Models;
+using SalesManagementSystem.Repositories;
+using SalesManagementSystem.Utils;
 
 namespace SalesManagementSystem.Forms.Client
 {
@@ -48,13 +44,26 @@ namespace SalesManagementSystem.Forms.Client
             if ((int)currentUser.Role == (int)Role.Admin)
             {
                 btnAction.Visible = false;
+                btnBuyNow.Visible = false;
+                nudQuantity.Visible = false;
+                lblQuantity.Visible = false;
                 this.Text = "Vizualizare Produs (Admin) — SalesManagementSystem";
             }
             else
             {
-                btnAction.Text = "Adaugă în Coș";
                 this.Text = "Detalii Produs — SalesManagementSystem";
                 SetupBuyControls();
+
+                int cartQty = ShoppingCart.GetQuantity(product.Id);
+                if (cartQty > 0)
+                {
+                    nudQuantity.Value = cartQty;
+                    btnAction.Text = "Actualizează Coșul";
+                }
+                else
+                {
+                    btnAction.Text = "Adaugă în Coș";
+                }
             }
         }
 
@@ -67,7 +76,8 @@ namespace SalesManagementSystem.Forms.Client
         private void SetupBuyControls()
         {
             lblQuantity.Location = new Point(richTextBox1.Left, btnAction.Top - 35);
-            
+
+            nudQuantity.Minimum = 0;
             nudQuantity.Maximum = Math.Max(1, _product.Stock);
             nudQuantity.Value = 1;
             nudQuantity.Location = new Point(richTextBox1.Left + 80, btnAction.Top - 38);
@@ -75,8 +85,9 @@ namespace SalesManagementSystem.Forms.Client
             if (_product.Stock <= 0)
             {
                 nudQuantity.Enabled = false;
-                nudQuantity.Value = 0;
                 nudQuantity.Minimum = 0;
+                nudQuantity.Value = 0;
+
             }
 
             btnBuyNow.Enabled = _product.Stock > 0;
@@ -148,14 +159,25 @@ namespace SalesManagementSystem.Forms.Client
 
         private void btnAction_Click(object sender, EventArgs e)
         {
-            if(_product != null)
+            if (_product != null)
             {
-                ShoppingCart.Add(_product);
-
-                MessageBox.Show($"'{_product.Name}' a fost adăugat în coș!",
-                        "Succes",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                int qty = (int)nudQuantity.Value;
+                if (qty == 0)
+                {
+                    ShoppingCart.Remove(_product.Id);
+                    MessageBox.Show($"'{_product.Name}' a fost sters din coș!",
+                            "Succes",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                }
+                else
+                {
+                    ShoppingCart.SetQuantity(_product, qty);
+                    MessageBox.Show($"Cantitatea pentru '{_product.Name}' a fost actualizată în coș!",
+                            "Succes",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                }
 
                 this.Close();
             }
@@ -163,7 +185,7 @@ namespace SalesManagementSystem.Forms.Client
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close();
         }
 
     }

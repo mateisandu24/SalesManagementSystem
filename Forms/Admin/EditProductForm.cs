@@ -1,12 +1,8 @@
+using System;
+using System.Windows.Forms;
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
-using SalesManagementSystem.Forms.Admin;
-using SalesManagementSystem.Forms.Client;
-using SalesManagementSystem.Forms.InOut;
-
-using System;
-using System.Windows.Forms;
 
 namespace SalesManagementSystem.Forms.Admin
 {

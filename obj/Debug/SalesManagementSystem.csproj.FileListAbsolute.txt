@@ -54,3 +54,4 @@ C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManageme
 C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.InOut.LoginForm.resources
 C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Client.ProductDetailsForm.resources
 C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.InOut.RegisterForm.resources
+C:\Users\Matei\Desktop\Proiect PAW\SalesManagementSystem\obj\Debug\SalesManagementSystem.Forms.Admin.EditProductForm.resources

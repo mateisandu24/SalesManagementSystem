@@ -6,15 +6,15 @@ namespace SalesManagementSystem.Utils
 {
     public static class ThemeManager
     {
-        // Colors
+        
         public static Color BackgroundColor = Color.FromArgb(245, 247, 250);
         public static Color PrimaryColor = Color.FromArgb(67, 97, 238);
         public static Color PrimaryColorHover = Color.FromArgb(58, 86, 212);
         public static Color TextColor = Color.FromArgb(43, 45, 66);
         public static Color TextLight = Color.FromArgb(141, 153, 174);
         public static Color ControlBackground = Color.White;
+
         
-        // Fonts
         public static Font MainFont = new Font("Segoe UI", 10F, FontStyle.Regular);
         public static Font HeaderFont = new Font("Segoe UI", 16F, FontStyle.Bold);
         public static Font ButtonFont = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
@@ -54,7 +54,7 @@ namespace SalesManagementSystem.Utils
                     txt.Font = MainFont;
                     txt.BorderStyle = BorderStyle.FixedSingle;
                     txt.BackColor = ControlBackground;
-                  
+
                 }
                 else if (control is DataGridView dgv)
                 {
@@ -91,7 +91,7 @@ namespace SalesManagementSystem.Utils
                     dgv.DefaultCellStyle = rowStyle;
                     dgv.RowTemplate.Height = 35;
                 }
-                
+
                 if (control.HasChildren)
                 {
                     ApplyToControls(control.Controls);

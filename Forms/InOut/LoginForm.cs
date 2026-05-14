@@ -1,13 +1,9 @@
+using System;
+using System.Windows.Forms;
+using SalesManagementSystem.Forms.Client;
 using SalesManagementSystem.Models;
 using SalesManagementSystem.Repositories;
 using SalesManagementSystem.Utils;
-using SalesManagementSystem.Forms.Admin;
-using SalesManagementSystem.Forms.Client;
-using SalesManagementSystem.Forms.InOut;
-
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace SalesManagementSystem.Forms.InOut
 {
@@ -21,7 +17,7 @@ namespace SalesManagementSystem.Forms.InOut
 
             _userRepo = new UserRepository(ConfigHelper.ConnectionString);
 
-            }
+        }
 
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {
@@ -39,7 +35,7 @@ namespace SalesManagementSystem.Forms.InOut
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 txtUsername.Focus();
-                
+
                 return;
             }
 
@@ -47,9 +43,9 @@ namespace SalesManagementSystem.Forms.InOut
             {
                 MessageBox.Show("Vă rugăm să introduceți parola.", "Câmp obligatoriu",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                
+
                 txtPassword.Focus();
-                
+
                 return;
             }
 
@@ -60,16 +56,16 @@ namespace SalesManagementSystem.Forms.InOut
                 Form1 mainForm = new Form1(loggedUser);
 
                 mainForm.Show();
-                
-                this.Hide(); 
+
+                this.Hide();
             }
             else
             {
                 MessageBox.Show("Username sau parolă incorectă. Vă rugăm să încercați din nou.",
                     "Autentificare eșuată", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+
                 txtPassword.Clear();
-                
+
                 txtPassword.Focus();
             }
         }
@@ -78,7 +74,7 @@ namespace SalesManagementSystem.Forms.InOut
         {
             RegisterForm regForm = new RegisterForm();
 
-            regForm.ShowDialog(); 
+            regForm.ShowDialog();
         }
     }
 }

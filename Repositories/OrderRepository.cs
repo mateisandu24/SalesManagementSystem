@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
@@ -44,7 +45,7 @@ namespace SalesManagementSystem.Repositories
                         {
                             InsertItem(connection, orderId, item, transaction);
 
-                            UpdateStock(connection,item,transaction);
+                            UpdateStock(connection, item, transaction);
                         }
 
                         transaction.Commit();
@@ -118,19 +119,22 @@ namespace SalesManagementSystem.Repositories
                             new { UserId = userId, TotalAmount = totalAmount },
                             transaction);
 
-                        // Insert one OrderItem row per unit (or a single row — here we insert one row with the total price)
+                        
                         string insertItemSql = @"
                             INSERT INTO OrderItems (OrderId, ProductId, Price) 
                             VALUES (@OrderId, @ProductId, @Price)";
 
-                        connection.Execute(insertItemSql, new
+                        for (int i = 0; i < quantity; i++)
                         {
-                            OrderId = orderId,
-                            ProductId = product.Id,
-                            Price = totalAmount
-                        }, transaction);
+                            connection.Execute(insertItemSql, new
+                            {
+                                OrderId = orderId,
+                                ProductId = product.Id,
+                                Price = product.Price
+                            }, transaction);
+                        }
 
-                        // Decrement stock
+                        
                         string updateStockSql = @"
                             UPDATE Products SET Stock = Stock - @Qty WHERE Id = @Id";
 
@@ -168,7 +172,12 @@ namespace SalesManagementSystem.Repositories
             INNER JOIN Users u ON o.UserId = u.Id
             ORDER BY o.OrderDate DESC";
 
-                return connection.Query(sql).ToList();
+                var dt = new System.Data.DataTable();
+                using (var reader = connection.ExecuteReader(sql))
+                {
+                    dt.Load(reader);
+                }
+                return dt;
             }
         }
 
@@ -185,7 +194,62 @@ namespace SalesManagementSystem.Repositories
             WHERE o.UserId = @UserId
             ORDER BY o.OrderDate DESC";
 
-                return connection.Query(sql, new { UserId = userId }).ToList();
+                var dt = new System.Data.DataTable();
+                using (var reader = connection.ExecuteReader(sql, new { UserId = userId }))
+                {
+                    dt.Load(reader);
+                }
+                return dt;
+            }
+        }
+
+        public decimal GetSalesLastNDays(int days)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string sql = @"
+            SELECT ISNULL(SUM(TotalAmount), 0)
+            FROM Orders
+            WHERE OrderDate >= DATEADD(day, -@Days, GETDATE())";
+                return connection.QuerySingleOrDefault<decimal>(sql, new { Days = days });
+            }
+        }
+
+        public DataTable GetOrderDetails(int orderId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                string sql = @"
+            SELECT 
+                p.Name AS [Nume Produs],
+                COUNT(oi.ProductId) AS [Cantitate],
+                SUM(oi.Price) AS [Preț (RON)]
+            FROM OrderItems oi
+            INNER JOIN Products p ON oi.ProductId = p.Id
+            WHERE oi.OrderId = @OrderId
+            GROUP BY p.Name";
+
+                var dt = new DataTable();
+                using (var reader = connection.ExecuteReader(sql, new { OrderId = orderId }))
+                {
+                    dt.Load(reader);
+                }
+
+                decimal total = 0;
+                foreach (DataRow row in dt.Rows)
+                {
+                    if (row["Preț (RON)"] != DBNull.Value)
+                    {
+                        total += Convert.ToDecimal(row["Preț (RON)"]);
+                    }
+                }
+
+                var sumRow = dt.NewRow();
+                sumRow["Nume Produs"] = "TOTAL";
+                sumRow["Preț (RON)"] = total;
+                dt.Rows.Add(sumRow);
+
+                return dt;
             }
         }
     }

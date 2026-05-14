@@ -1,12 +1,12 @@
-using Dapper;
-using SalesManagementSystem.Models;
-using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Dapper;
+using Microsoft.VisualBasic.FileIO;
+using SalesManagementSystem.Models;
 
 namespace SalesManagementSystem.Repositories
 {
@@ -39,7 +39,7 @@ namespace SalesManagementSystem.Repositories
 
                 if (!parser.EndOfData)
                 {
-                    parser.ReadFields(); 
+                    parser.ReadFields();
                 }
 
                 using (var connection = new SqlConnection(_connectionString))
@@ -50,13 +50,30 @@ namespace SalesManagementSystem.Repositories
                     {
                         string[] fields = parser.ReadFields();
 
-                        if (fields.Length < 10) continue;
+                        if (fields.Length < 11) continue;
 
-                        string name = fields[2];
-                        string description = CleanHTML(fields[3]);
-                        string imageUrl = fields[4];
-                        string collection = fields[5];
-                        string brandString = fields.Length > 52 ? fields[52].Replace(" ", "") : "Other";
+                        string name = fields[0];
+                        string baseDescription = CleanHTML(fields[1]);
+                        string imageUrl = fields[2];
+                        string collection = fields[3];
+
+                        string modUtilizare = CleanHTML(fields[6]);
+                        string ingrediente = CleanHTML(fields[7]);
+                        string precautii = CleanHTML(fields[8]);
+                        string producator = CleanHTML(fields[9]);
+
+                        string combinedDescription = baseDescription;
+                        if (!string.IsNullOrWhiteSpace(modUtilizare))
+                            combinedDescription += $"\r\n\r\nMod de utilizare:\r\n{modUtilizare}";
+                        if (!string.IsNullOrWhiteSpace(ingrediente))
+                            combinedDescription += $"\r\n\r\nIngrediente:\r\n{ingrediente}";
+                        if (!string.IsNullOrWhiteSpace(precautii))
+                            combinedDescription += $"\r\n\r\nPrecauții:\r\n{precautii}";
+                        if (!string.IsNullOrWhiteSpace(producator))
+                            combinedDescription += $"\r\n\r\nProducător:\r\n{producator}";
+
+                        string description = combinedDescription;
+                        string brandString = fields[10].Replace(" ", "");
 
                         if (!Enum.TryParse(brandString, true, out Brand brandEnum))
                         {
@@ -68,7 +85,7 @@ namespace SalesManagementSystem.Repositories
                         if (collection.IndexOf("Picioare", StringComparison.OrdinalIgnoreCase) >= 0)
                             mainCat = MainCategory.FootCare;
 
-                        else if (collection.IndexOf("Corp", StringComparison.OrdinalIgnoreCase) >= 0 
+                        else if (collection.IndexOf("Corp", StringComparison.OrdinalIgnoreCase) >= 0
                             || collection.IndexOf("Body", StringComparison.OrdinalIgnoreCase) >= 0)
                             mainCat = MainCategory.BodyCare;
 
@@ -78,7 +95,7 @@ namespace SalesManagementSystem.Repositories
 
                         SubCategory subCat = SubCategory.Other;
 
-                        if (name.IndexOf("Balsam", StringComparison.OrdinalIgnoreCase) >= 0 
+                        if (name.IndexOf("Balsam", StringComparison.OrdinalIgnoreCase) >= 0
                             || name.IndexOf("Loțiune", StringComparison.OrdinalIgnoreCase) >= 0)
                             subCat = SubCategory.Lotion;
 
@@ -88,12 +105,12 @@ namespace SalesManagementSystem.Repositories
                         else if (name.IndexOf("Gel de duș", StringComparison.OrdinalIgnoreCase) >= 0)
                             subCat = SubCategory.ShowerGel;
 
-                        else if (name.IndexOf("Săpun", StringComparison.OrdinalIgnoreCase) >= 0 
+                        else if (name.IndexOf("Săpun", StringComparison.OrdinalIgnoreCase) >= 0
                             || name.IndexOf("Soaps", StringComparison.OrdinalIgnoreCase) >= 0)
                             subCat = SubCategory.Soap;
 
 
-                        decimal.TryParse(fields[8], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal rawPrice);
+                        decimal.TryParse(fields[5], NumberStyles.Any, CultureInfo.InvariantCulture, out decimal rawPrice);
                         decimal finalPrice = Math.Max(10m, Math.Min(200m, rawPrice));
 
 
@@ -108,7 +125,7 @@ namespace SalesManagementSystem.Repositories
                             Description = description,
                             ImageUrl = imageUrl,
                             Price = finalPrice,
-                            Stock = 20,
+                            Stock = 50,
                             Vat = 0.21m,
                             MainCategory = (int)mainCat,
                             SubCategory = (int)subCat,
@@ -172,7 +189,17 @@ namespace SalesManagementSystem.Repositories
         {
             using (var connection = new SqlConnection(_connectionString))
             {
+                connection.Execute("DELETE FROM OrderItems WHERE ProductId = @Id", new { Id = id });
                 connection.Execute("DELETE FROM Products WHERE Id = @Id", new { Id = id });
+            }
+        }
+
+        public void DeleteAll()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute("DELETE FROM OrderItems");
+                connection.Execute("DELETE FROM Products");
             }
         }
 

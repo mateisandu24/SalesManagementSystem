@@ -48,18 +48,18 @@ namespace SalesManagementSystem.Forms.Admin
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             
             // Theme Settings
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
-            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.BackColor = System.Drawing.Color.FromArgb(245, 247, 250);
+            this.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.ForeColor = System.Drawing.Color.FromArgb(43, 45, 66);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(43, 45, 66);
             this.dgvOrders.BackgroundColor = System.Drawing.Color.White;
             this.dgvOrders.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvOrders.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvOrders.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvOrders.EnableHeadersVisualStyles = false;
-            this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.dgvOrders.GridColor = System.Drawing.Color.FromArgb(230, 230, 230);
             this.dgvOrders.RowHeadersVisible = false;
             this.dgvOrders.AllowUserToAddRows = false;
             this.dgvOrders.AllowUserToDeleteRows = false;
@@ -68,20 +68,20 @@ namespace SalesManagementSystem.Forms.Admin
             this.dgvOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             System.Windows.Forms.DataGridViewCellStyle headerStyle = new System.Windows.Forms.DataGridViewCellStyle();
             headerStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            headerStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
+            headerStyle.BackColor = System.Drawing.Color.FromArgb(41, 50, 65);
             headerStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 10.5F, System.Drawing.FontStyle.Bold);
             headerStyle.ForeColor = System.Drawing.Color.White;
-            headerStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(50)))), ((int)(((byte)(65)))));
+            headerStyle.SelectionBackColor = System.Drawing.Color.FromArgb(41, 50, 65);
             this.dgvOrders.ColumnHeadersDefaultCellStyle = headerStyle;
             this.dgvOrders.ColumnHeadersHeight = 40;
             System.Windows.Forms.DataGridViewCellStyle rowStyle = new System.Windows.Forms.DataGridViewCellStyle();
             rowStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             rowStyle.BackColor = System.Drawing.Color.White;
             rowStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular);
-            rowStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            rowStyle.ForeColor = System.Drawing.Color.FromArgb(43, 45, 66);
             rowStyle.Padding = new System.Windows.Forms.Padding(5);
-            rowStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            rowStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            rowStyle.SelectionBackColor = System.Drawing.Color.FromArgb(224, 238, 255);
+            rowStyle.SelectionForeColor = System.Drawing.Color.FromArgb(30, 30, 30);
             this.dgvOrders.DefaultCellStyle = rowStyle;
             this.dgvOrders.RowTemplate.Height = 35;
 

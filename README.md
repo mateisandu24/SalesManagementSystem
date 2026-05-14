@@ -45,3 +45,32 @@ The SQL Server backend supports relational data across Users, Products, Shopping
 * **Flat Design:** WinForms native 3D borders are flattened for a more modern aesthetic.
 * **Responsiveness:** AutoScale mode ensures form layouts don't break when switching monitors or changing OS font scales.
 * **Memory Management:** Forms and image Streams are correctly disposed to prevent memory leaks during intense asynchronous grid loading operations.
+
+## 📸 Screenshots
+
+**Login Screen**  
+![Login](./screenshots/login.png)
+
+**Create Account**  
+![Create Account](./screenshots/createacc.png)
+
+**Client Product Catalog**  
+![Client Catalog](./screenshots/productscatalogclient.png)
+
+**Product Details**  
+![Product Details](./screenshots/productdetails.png)
+
+**Shopping Cart**  
+![Shopping Cart](./screenshots/shoppingcart.png)
+
+**Client Order History**  
+![Client Order History](./screenshots/clienthistory.png)
+
+**Order History Details**  
+![Cart History Client 1](./screenshots/carthistoryclient1.png)
+
+**Admin Dashboard**  
+![Admin Dashboard](./screenshots/admindashboard.png)
+
+**Admin CSV Import**  
+![Import CSV](./screenshots/importcsv.png)
