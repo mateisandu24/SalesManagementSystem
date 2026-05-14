@@ -1,76 +1,161 @@
-# Sales Management System 🛒
+# Sales Management System
 
-A robust, full-featured desktop application built with **C# Windows Forms (WinForms)** and **.NET Framework 4.7.2**. The application functions as an eCommerce/Sales Management platform, supporting product browsing, cart functionalities, immediate purchasing, user authentication, and comprehensive administrative tools.
+*Academic Project for Windows Application Programming (PAW) - 2026*
 
-## 🚀 Key Features
+**Theme:** Sales Management (Gestiune Vânzări)  
+**Type:** Individual Project  
+**Framework:** Windows Forms, .NET Framework 4.8, Visual Studio 2022  
 
-### 👤 User Authentication
-* **Login & Registration:** Complete secure authentication workflow.
-* **UI/UX Polishes:** Dynamic "Show Password" (Arată parola) toggles separated cleanly into Designer files for scalable UI.
+---
 
-### 🛍️ Product Catalog (Dashboard)
-* **Dynamic Grid View:** Products are listed with attributes like Name, Price, and Stock.
-* **Async Image Loading:** Product images are seamlessly fetched over the network from Wix storage formats without freezing the UI.
-* **Visual Polish:** A `loading.gif` plays smoothly on image cells while the request processes, switching out natively to the product bitmap upon completion. Faulty URLs fallback to an invisible empty cell rather than crashing or showing red 'X' errors.
-* **Responsive Layout:** Search bars, filtering dropdowns, and grids utilize proper WinForm Anchoring, keeping the interface fluid regardless of window maximization or scaling (DPI).
+## Context & "Taking It a Step Further"
 
-### 🏷️ Product Details & Checkout
-* **Rich Descriptions:** Selecting a product opens a detailed breakdown with a scalable image and rich-text description.
-* **Instant Checkout:** "Cumpără Acum" (Buy Now) functionality using a `NumericUpDown` selector configured logically (caps automatically at available stock).
-* **Database Transactions:** Direct buying calls a transactional database method (`PlaceOrderDirect`), ensuring that creating the order record and decrementing the product stock happens atomically.
+The assigned theme for this academic project was **"Sales Management"**. However, I wanted to build something that bridges the gap between a standard university assignment and a real-world application. 
 
-### ⚙️ Admin Dashboard
-* **CSV Imports:** Admins can quickly bulk-import items into the system.
-* **Order Tracking:** Monitor client purchases and order histories.
-* **Clean Organization:** Dashboard buttons are neatly sized, styled with flat modern properties, and utilize clear emojis (📂, 📋) for immediate visual feedback.
+Instead of generating dummy data, I used an actual, public CSV export from a real Wix eCommerce platform (**Salesfactory**). By seeding the local SQL Server database with real products, authentic descriptions, live URLs, and accurate pricing, I created a much more tangible and complex development environment. 
 
-## 🛠️ Architecture & Technology Stack
+This application functions as a complete eCommerce platform with a strictly separated 3-tier architecture, covering everything from user authentication to complex transactional logic for checkout and stock management.
 
-* **Framework:** .NET Framework 4.7.2
-* **Language:** C# 7.3
-* **Database Access:** **Dapper** (Micro-ORM) alongside `System.Data.SqlClient`. This ensures fast, parameterized SQL queries safe from injections.
-* **Pattern:** The application strictly adheres to the **Repository Pattern**. Database logic is abstracted away into dedicated classes (`UserRepository`, `ProductRepository`, `OrderRepository`), keeping the WinForms code-behinds focused solely on presentation.
-* **Theme Management:** A centralized `ThemeManager` controls UI styling, enabling consistent application-wide themes (dark accents, flat borders, matching font families).
-* **Designer Segregation:** A strict Clean Code rule was enforced: No dynamic instantiation of UI elements (`new Button()`, `new Label()`, etc.) happens inside runtime logic `.cs` files. All controls are strictly declared and auto-scaled within the `*.Designer.cs` partial classes.
+---
 
-## 🗄️ Database Schema & Transactions
-The SQL Server backend supports relational data across Users, Products, Shopping Carts, Transactions, and Order items. Key transactional integrity is implemented in the `OrderRepository`. When an order is placed:
-1. An SQL Transaction starts.
-2. The order is inserted into the Orders table.
-3. Order items are recorded.
-4. Product Stock is decremented (via `UPDATE Products SET Stock = Stock - 1 WHERE Id = @Id AND Stock > 0`).
-5. Transaction commits (or rolls back safely if an exception occurs).
+## Grading Criteria Mapping
 
-## 🎨 UI/UX Highlights
-* **Flat Design:** WinForms native 3D borders are flattened for a more modern aesthetic.
-* **Responsiveness:** AutoScale mode ensures form layouts don't break when switching monitors or changing OS font scales.
-* **Memory Management:** Forms and image Streams are correctly disposed to prevent memory leaks during intense asynchronous grid loading operations.
+To facilitate the evaluation process, here is how the project fulfills the core requirements:
 
-## 📸 Screenshots
+* **1p - Data Model Implementation:** The project includes multiple interconnected models (`User`, `Product`, `ShoppingCart`, `Transaction`), well above the required minimum of 3.
+* **1p - Data Display Mechanisms:** Advanced use of `DataGridView` elements to cleanly display Product Catalogs, Cart Items, Order Histories, and Admin Dashboards.
+* **1p - Entity Creation Mechanisms:** Registration forms for new users, adding items to the session cart, creating orders, and an Admin CSV importer for bulk creating products.
+* **1p - Entity Deletion Mechanisms:** Admins can delete specific products or execute a global wipe of the catalog.
+* **1p - Entity Editing Mechanisms:** Admins can edit product details (price, stock, descriptions) through a dedicated `EditProductForm`.
+* **2p - SQL Database Integration:** The application uses a robust SQL Server backend, heavily relying on **Dapper** for parameterized, injection-safe querying and complex transactions.
+* **2p - Code Styling & Clean Code:** Strict adherence to C# conventions. UI initialization is strictly kept within `.Designer.cs` files (no dynamic runtime UI generation). Common behaviors are abstracted (e.g., `ImageService`), and database logic is fully encapsulated within the Repository Pattern (`ProductRepository`, `OrderRepository`).
 
+---
+
+## Architecture Highlights & "Cool Code"
+
+This section serves as a technical notebook to highlight specific decisions that demonstrate a deep understanding of the .NET ecosystem.
+
+### 1. Connection String Security & Separation
+A common anti-pattern in beginner desktop apps is hardcoding the SQL connection string directly inside the Form classes. To mimic production standards, I decoupled the database configuration by storing the connection string securely inside `App.config`:
+
+```xml
+<connectionStrings>
+    <add name="SalesDb"
+         connectionString="Server=(localdb)\MSSQLLocalDB;Database=SalesManagementSystem;Integrated Security=True;"
+         providerName="System.Data.SqlClient" />
+</connectionStrings>
+```
+I then created a static `ConfigHelper` class to extract it via `ConfigurationManager`. This ensures that if the server environment changes, I only have to update a single XML configuration file without recompiling the entire C# application.
+
+### 2. Database Access: Why Dapper?
+When deciding on a database access technology, I explicitly chose **Dapper** (a Micro-ORM) over heavier frameworks like Entity Framework or outdated approaches like ADO.NET DataSets. 
+
+* **Speed & Control:** Dapper maps SQL results directly to C# objects almost as fast as a raw `SqlDataReader`. It gave me absolute control over my queries.
+* **Atomic Transactions:** Dealing with stock means dealing with concurrency. Dapper allowed me to easily pass an `SqlTransaction` across multiple operations to ensure that creating an order and decrementing stock happens atomically.
+
+```csharp
+// Proof of Concept: Atomic Transactions with Dapper
+public bool PlaceOrder(Guid userId, List<Product> items)
+{
+    using (var connection = new SqlConnection(_connectionString))
+    {
+        connection.Open();
+        using (var transaction = connection.BeginTransaction())
+        {
+            try
+            {
+                // 1. Insert Order
+                int orderId = connection.QuerySingle<int>(
+                    insertOrderSql, new { UserId = userId, TotalAmount = totalAmount }, transaction);
+
+                // 2. Insert Items & 3. Update Stock safely
+                foreach (var item in items)
+                {
+                    InsertItem(connection, orderId, item, transaction);
+                    UpdateStock(connection, item, transaction); 
+                }
+
+                transaction.Commit(); // Atomic success
+                return true;
+            }
+            catch
+            {
+                transaction.Rollback(); // Safe failure
+                throw;
+            }
+        }
+    }
+}
+```
+
+### 3. The Image Processing Challenge: PictureBox vs. DataGridView
+A major technical hurdle was efficiently rendering real-world images from the Wix CSV URLs into a dynamic list.
+
+**The naive approach:** Standard WinForms tutorials suggest using a `PictureBox`. While `PictureBox.LoadAsync(url)` works great for a *single* static image on a profile page, it completely falls apart when rendering dozens of dynamic products in a list.
+
+**The Solution:** Because the catalog is a `DataGridView`, I had to map images directly into a `DataGridViewImageColumn`. To prevent the UI thread from freezing while fetching external Wix media URLs, I built a custom, asynchronous `ImageService`. It fetches the byte stream via `HttpClient`, converts it into a `Bitmap` in memory (`MemoryStream`), and safely assigns it to the grid cells.
+
+![DataGridView Rendering Showcase](./screenshots/productscatalogclient.png)
+*(Showcasing the custom async image rendering inside a DataGridView)*
+
+```csharp
+// Proof of Concept: Asynchronous DataGrid Image Mapping
+public async Task<Image> GetImageAsync(string imageUrl)
+{
+    string fullImageUrl = ResolveImageUrl(imageUrl); // Parses Wix format
+    if (string.IsNullOrEmpty(fullImageUrl)) return null;
+
+    try
+    {
+        var response = await _httpClient.GetAsync(fullImageUrl);
+        if (!response.IsSuccessStatusCode) return null;
+
+        byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
+        
+        // Convert stream to Bitmap safely without locking memory
+        using (var ms = new System.IO.MemoryStream(imageBytes))
+        {
+            return new Bitmap(Image.FromStream(ms));
+        }
+    }
+    catch
+    {
+        return null; // Fallback so the grid never crashes
+    }
+}
+```
+
+### 4. Stateful Session Management
+To manage the shopping cart efficiently without unnecessarily hitting the database on every click, I implemented a static `ShoppingCart` class. This acts as an in-memory session state while the application is running. It aggregates products added by the user until checkout, at which point the entire collection is serialized into the database transactionally.
+
+---
+
+## Application Workflow & Screenshots
+
+### Authentication
 **Login Screen**  
 ![Login](./screenshots/login.png)
 
 **Create Account**  
 ![Create Account](./screenshots/createacc.png)
 
-**Client Product Catalog**  
-![Client Catalog](./screenshots/productscatalogclient.png)
-
-**Product Details**  
+### Client Workflow
+**Product Details & Add to Cart**  
 ![Product Details](./screenshots/productdetails.png)
 
-**Shopping Cart**  
+**Shopping Cart & Checkout**  
 ![Shopping Cart](./screenshots/shoppingcart.png)
 
 **Client Order History**  
 ![Client Order History](./screenshots/clienthistory.png)
 
-**Order History Details**  
-![Cart History Client 1](./screenshots/carthistoryclient1.png)
+**Detailed Order Invoice**  
+![Cart History Details](./screenshots/carthistoryclient1.png)
 
+### Administrator Workflow
 **Admin Dashboard**  
 ![Admin Dashboard](./screenshots/admindashboard.png)
 
-**Admin CSV Import**  
+**Admin CSV Bulk Import**  
 ![Import CSV](./screenshots/importcsv.png)
