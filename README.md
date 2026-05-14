@@ -12,7 +12,7 @@
 
 The assigned theme for this academic project was **"Sales Management"**. However, I wanted to build something that bridges the gap between a standard university assignment and a real-world application. 
 
-Instead of generating dummy data, I used an actual, public CSV export from a real Wix eCommerce platform (**Salesfactory**). By seeding the local SQL Server database with real products, authentic descriptions, live URLs, and accurate pricing, I created a much more tangible and complex development environment. 
+Instead of generating dummy data, I used an actual, public CSV export from a real Wix eCommerce platform (**setandglow.ro, a platform I am currently working on for Sales Factory**). By seeding the local SQL Server database with real products, authentic descriptions, live URLs, and accurate pricing, I created a much more tangible and complex development environment. 
 
 This application functions as a complete eCommerce platform with a strictly separated 3-tier architecture, covering everything from user authentication to complex transactional logic for checkout and stock management.
 
